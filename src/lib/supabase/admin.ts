@@ -10,13 +10,12 @@ import type { Database } from '@/types/database.types'
  * JANGAN pernah expose client ini ke browser.
  */
 export function createAdminClient() {
-  if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
-    throw new Error('SUPABASE_SERVICE_ROLE_KEY is not set')
-  }
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co'
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 'placeholder'
 
   return createClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY,
+    supabaseUrl,
+    serviceRoleKey,
     {
       auth: {
         autoRefreshToken: false,
