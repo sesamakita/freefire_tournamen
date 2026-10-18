@@ -101,6 +101,8 @@ Setiap User Story PRD dipetakan ke modul, layar, dan aturan bisnis di FSD ini. *
 | SCR-T04 | Status tim | kapten | ya | Lihat status verifikasi |
 | SCR-T05 | Jadwal & Room ID | kapten | ya | Lihat match + room |
 | SCR-T06 | Ajukan dispute | kapten | ya | Form sengketa |
+| SCR-T07 | Undang Anggota | kapten | ya | Kirim undangan tim (BARU — Keputusan F1/Q2) |
+| SCR-T08 | Terima Undangan | anggota | tidak* | Terima/tolak undangan (*login diperlukan setelah preview) |
 | SCR-V01 | Verifikasi tim (antrian) | admin | ya | Approve/reject tim |
 | SCR-M01 | Kelola match | admin, panitia | ya | CRUD match & slot |
 | SCR-M02 | Atur Room ID | admin | ya | Isi/rotasi room |
@@ -389,7 +391,106 @@ Format: **Tujuan → Field & Validasi → Aksi → State → Kriteria Penerimaan
 4. Room ID **tidak ada di HTML awal** (fetch terpisah) — mencegah muncul di cache/SEO.
 5. Setelah admin rotasi Room ID, kapten melihat nilai baru pada refresh berikutnya.
 
-### 5.5 Template untuk Layar Lain
+### 5.5 SCR-T07 — Undang Anggota
+
+**Tujuan:** Kapten mengundang pemain untuk bergabung ke roster tim via email.
+
+**Siapa:** `kapten` tim yang bersangkutan.
+
+| Field | Tipe | Wajib | Validasi |
+|---|---|---|---|
+| Email pemain | email | ya | Format valid; sistem cari user terdaftar |
+| IGN (In-Game Name) | text | ya | 3–20 karakter |
+| UID Game | text | ya | 8–12 digit angka, unik per turnamen |
+| Peran | select | ya | rusher / sniper / support / igl / cadangan |
+| Status | toggle | ya | Inti / Substitute (maks 2 substitute total) |
+
+**Aksi:**
+
+- **Kirim Undangan** → buat `team_invitations` dengan token unik, kirim email ke pemain via Resend.
+- Email berisi link: `{APP_URL}/tim/bergabung/{token}`
+
+| Kondisi | Tampilan |
+|---|---|
+| Email belum terdaftar | Banner info: _"Email ini belum punya akun ArenaKu. Undangan tetap dikirim — pemain perlu daftar dulu sebelum bisa menerima."_ |
+| UID sudah dipakai tim lain | Error inline: _"UID ini sudah terdaftar di tim [nama tim]."_ |
+| Anggota sudah 6 | Tombol "Tambah Undangan" hilang + penjelasan batas |
+| Substitute sudah 2 | Toggle substitute disabled dengan penjelasan |
+| Roster locked | Seluruh form disabled + banner: _"Roster sudah dikunci. Hubungi panitia."_ |
+| Undangan pending ada | Tampilkan daftar undangan terkirim + status (pending/accepted/declined/expired) |
+
+**Kriteria Penerimaan:**
+
+1. Kirim undangan ke email terdaftar → email diterima dalam 2 menit, undangan masuk daftar `pending`.
+2. Kirim undangan ke email belum terdaftar → email terkirim, status `pending`, bisa diterima setelah daftar.
+3. UID duplikat → ditolak sebelum submit, error inline dengan nama tim pemakai.
+4. Kirim ke anggota yang sudah di tim → ditolak: _"Pemain ini sudah terdaftar di tim [nama]."_
+5. Token undangan expire setelah 7 hari → status berubah ke `expired`, tidak bisa digunakan.
+6. Kapten bisa batalkan undangan `pending` → status berubah ke `expired`.
+
+---
+
+### 5.6 SCR-T08 — Terima Undangan
+
+**Tujuan:** Pemain melihat detail undangan tim dan memutuskan untuk menerima atau menolak.
+
+**Siapa:** Siapapun via link (publik untuk preview), butuh login untuk aksi.
+
+**URL:** `/tim/bergabung/{token}`
+
+**Alur:**
+
+```
+Buka link (tanpa login)
+  → Tampilkan preview: nama turnamen, nama tim, kapten, peran, IGN, UID
+  → Tombol "Masuk untuk Menerima" / "Tolak"
+      │
+      ▼
+  Jika belum login → redirect ke /register (baru) atau /login
+  Setelah login → kembali ke halaman ini
+      │
+      ▼
+  Tampilkan detail + tombol "Terima Undangan" / "Tolak"
+```
+
+| Kondisi | Tampilan |
+|---|---|
+| Token valid, belum expired, status pending | Preview normal + tombol terima/tolak |
+| Token expired | _"Undangan ini sudah kadaluarsa (7 hari). Minta kapten kirim ulang."_ |
+| Token sudah accepted/declined | _"Undangan ini sudah diproses sebelumnya."_ |
+| Token tidak ditemukan | 404 dengan pesan: _"Undangan tidak ditemukan atau sudah tidak valid."_ |
+| User login tapi email berbeda dengan `invited_email` | Banner peringatan: _"Undangan ini ditujukan untuk {email}. Anda sedang login sebagai {email_login}. Lanjutkan?"_ + tombol konfirmasi |
+| Terima berhasil | Redirect ke SCR-T04 (Status Tim) + toast: _"Selamat! Kamu resmi bergabung di tim [nama tim]."_ |
+
+**Aksi Terima:**
+
+1. Validasi token masih `pending` dan belum expired.
+2. Validasi slot roster belum penuh (< 6 anggota).
+3. Validasi UID belum dipakai tim lain di turnamen yang sama.
+4. Insert ke `team_members` dengan `user_id` dari session yang sedang login.
+5. Update `team_invitations.status` → `accepted`.
+6. Update `team_invitations.invited_user_id` → user yang login.
+7. Catat di `audit_log` (`action: member.joined`, `entity: team`).
+8. Kirim notifikasi in-app ke kapten.
+
+**Aksi Tolak:**
+
+1. Update `team_invitations.status` → `declined`.
+2. Catat di `audit_log`.
+3. Kirim notifikasi in-app ke kapten.
+
+**Kriteria Penerimaan:**
+
+1. Token valid + user login sesuai email → terima berhasil, masuk `team_members`.
+2. Token valid + user login email berbeda → tampil warning, bisa tetap lanjut.
+3. Token expired → halaman error informatif, tanpa 500.
+4. Terima dua kali → ditolak: _"Kamu sudah menjadi anggota tim ini."_
+5. Roster sudah penuh (6 orang) → ditolak saat terima: _"Roster tim sudah penuh."_
+6. UID duplikat saat terima (race condition) → ditolak dengan nama tim pemakai.
+
+---
+
+### 5.7 Template untuk Layar Lain
 
 Setiap layar baru wajib mendokumentasikan minimal:
 
