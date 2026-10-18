@@ -18,7 +18,7 @@ export default function AuthLayout({
           <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-600 flex items-center justify-center shadow-lg shadow-amber-500/20 group-hover:scale-105 transition-transform">
             <Trophy className="w-6 h-6 text-zinc-950 stroke-[2.5]" />
           </div>
-          <span className="text-2xl font-black tracking-tight text-white uppercase italic">
+          <span className="text-2xl font-black tracking-tight text-white uppercase italic font-headline">
             Arena<span className="text-amber-500">Ku</span>
           </span>
         </Link>

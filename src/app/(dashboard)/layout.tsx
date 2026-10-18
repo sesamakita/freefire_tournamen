@@ -40,7 +40,7 @@ export default async function DashboardLayout({
               <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-600 flex items-center justify-center shadow-md shadow-amber-500/20 group-hover:scale-105 transition-transform">
                 <Trophy className="w-5 h-5 text-zinc-950 stroke-[2.5]" />
               </div>
-              <span className="text-xl font-black tracking-tight text-white uppercase italic">
+              <span className="text-xl font-black tracking-tight text-white uppercase italic font-headline">
                 Arena<span className="text-amber-500">Ku</span>
               </span>
             </Link>
