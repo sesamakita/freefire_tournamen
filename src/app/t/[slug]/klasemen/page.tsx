@@ -34,7 +34,7 @@ export default async function PublicStandingsPage({
       {/* Header Info */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h2 className="text-xl font-black text-white tracking-tight flex items-center gap-2">
+          <h2 className="text-xl text-white tracking-tight flex items-center gap-2">
             <Trophy className="w-5 h-5 text-amber-500" />
             Klasemen Resmi Turnamen (Live)
           </h2>
@@ -51,11 +51,11 @@ export default async function PublicStandingsPage({
       </div>
 
       {/* Standings Leaderboard Table (Mobile-First) */}
-      <div className="bg-zinc-900/80 border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl">
+      <div className="card-glow rounded-2xl overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse text-xs">
+          <table className="w-full text-left border-collapse text-xs ui-dense">
             <thead>
-              <tr className="border-b border-zinc-800 bg-zinc-950/80 text-[10px] font-black uppercase tracking-wider text-zinc-400">
+              <tr className="border-b border-zinc-800 bg-zinc-950/80 text-[11px] font-black uppercase tracking-wider text-zinc-400">
                 <th className="py-3 px-3 text-center w-12">Rank</th>
                 <th className="py-3 px-4">Nama Tim</th>
                 <th className="py-3 px-3 text-center w-14">MP</th>
@@ -75,21 +75,23 @@ export default async function PublicStandingsPage({
                     <tr
                       key={team.team_id || idx}
                       className={`hover:bg-zinc-800/40 transition-colors ${
-                        isTop1 ? "bg-amber-500/5 font-semibold" : ""
+                        isTop1
+                          ? "bg-[#f5c542]/[0.06] font-semibold border-l-2 border-l-[#f5c542]"
+                          : ""
                       }`}
                     >
                       {/* Rank */}
                       <td className="py-3.5 px-3 text-center">
                         {isTop1 ? (
-                          <span className="w-7 h-7 rounded-lg bg-amber-500 text-zinc-950 font-black text-xs inline-flex items-center justify-center shadow-md shadow-amber-500/20">
+                          <span className="w-7 h-7 rounded-lg bg-[#f5c542] text-[#241a00] font-black text-xs inline-flex items-center justify-center shadow-md shadow-[#f5c542]/30 ring-1 ring-[#ffe9a3]/50">
                             1
                           </span>
                         ) : isTop2 ? (
-                          <span className="w-7 h-7 rounded-lg bg-zinc-300 text-zinc-950 font-black text-xs inline-flex items-center justify-center">
+                          <span className="w-7 h-7 rounded-lg bg-[#c9d4e4] text-[#131a26] font-black text-xs inline-flex items-center justify-center ring-1 ring-[#eef3fa]/40">
                             2
                           </span>
                         ) : isTop3 ? (
-                          <span className="w-7 h-7 rounded-lg bg-amber-700/80 text-white font-black text-xs inline-flex items-center justify-center">
+                          <span className="w-7 h-7 rounded-lg bg-[#b4763c] text-[#1d1105] font-black text-xs inline-flex items-center justify-center ring-1 ring-[#e0a76e]/40">
                             3
                           </span>
                         ) : (
@@ -109,7 +111,7 @@ export default async function PublicStandingsPage({
                               className="w-6 h-6 rounded-md object-cover border border-zinc-800"
                             />
                           ) : (
-                            <div className="w-6 h-6 rounded-md bg-zinc-800 flex items-center justify-center text-[10px] font-bold text-zinc-400">
+                            <div className="w-6 h-6 rounded-md bg-zinc-800 flex items-center justify-center text-[11px] font-bold text-zinc-400">
                               {(team.team_nama || "T").slice(0, 2).toUpperCase()}
                             </div>
                           )}
@@ -134,11 +136,17 @@ export default async function PublicStandingsPage({
                         {team.best_placement ? `#${team.best_placement}` : "-"}
                       </td>
 
-                      {/* Total Points */}
+                      {/* Total Points — angka juara dibuat dominan sebagai fokus tabel */}
                       <td className="py-3.5 px-4 text-right">
-                        <span className="font-mono text-base font-black text-amber-400">
-                          {team.total_points}
-                        </span>
+                        {isTop1 ? (
+                          <span className="font-mono text-3xl leading-none text-[#f5c542] tracking-tight">
+                            {team.total_points}
+                          </span>
+                        ) : (
+                          <span className="font-mono text-base text-amber-400">
+                            {team.total_points}
+                          </span>
+                        )}
                       </td>
                     </tr>
                   );

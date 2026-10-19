@@ -66,12 +66,12 @@ export default async function TeamSchedulePage({
       </div>
 
       {/* Header */}
-      <div className="p-6 bg-zinc-900/90 border border-zinc-800 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="card-glow p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <span className="text-[10px] font-bold uppercase tracking-wider text-amber-500">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-amber-500">
             {team.tournaments?.nama}
           </span>
-          <h1 className="text-2xl font-black text-white tracking-tight mt-0.5">
+          <h1 className="text-3xl text-white tracking-tight mt-0.5">
             Jadwal Pertandingan: {team.nama}
           </h1>
           <p className="text-xs text-zinc-400 mt-1">
@@ -110,14 +110,14 @@ export default async function TeamSchedulePage({
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-3 border-b border-zinc-800">
                   <div>
                     <div className="flex items-center gap-2">
-                      <h3 className="font-bold text-base text-white tracking-tight">
+                      <h3 className="text-base text-white tracking-tight">
                         {m.nama}
                       </h3>
-                      <span className="px-2 py-0.5 rounded bg-zinc-800 text-[10px] font-semibold text-zinc-300">
+                      <span className="px-2 py-0.5 rounded bg-zinc-800 text-[11px] font-semibold text-zinc-300">
                         Round {m.round}
                       </span>
                       {m.grup && (
-                        <span className="px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 text-[10px] font-semibold">
+                        <span className="px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 text-[11px] font-semibold">
                           {m.grup}
                         </span>
                       )}
@@ -130,7 +130,7 @@ export default async function TeamSchedulePage({
 
                   <div>
                     <span
-                      className={`px-2.5 py-1 rounded-full text-[10px] font-bold capitalize ${
+                      className={`px-2.5 py-1 rounded-full text-[11px] font-bold capitalize ${
                         m.status === "selesai"
                           ? "bg-emerald-500/20 text-emerald-400"
                           : m.status === "ongoing"

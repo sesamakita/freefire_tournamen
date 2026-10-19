@@ -47,7 +47,7 @@ export default async function PublicSchedulePage({
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-xl font-black text-white tracking-tight flex items-center gap-2">
+        <h2 className="text-xl text-white tracking-tight flex items-center gap-2">
           <Calendar className="w-5 h-5 text-amber-500" />
           Jadwal Pertandingan
         </h2>
@@ -77,19 +77,19 @@ export default async function PublicSchedulePage({
             return (
               <div
                 key={m.id}
-                className="p-6 bg-zinc-900/80 border border-zinc-800 rounded-2xl space-y-4"
+                className="card-glow p-6 rounded-2xl space-y-4"
               >
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-3 border-b border-zinc-800">
                   <div>
                     <div className="flex items-center gap-2">
-                      <h3 className="font-extrabold text-base text-white tracking-tight">
+                      <h3 className="text-base text-white tracking-tight">
                         {m.nama}
                       </h3>
-                      <span className="px-2 py-0.5 rounded bg-zinc-800 text-[10px] font-semibold text-zinc-300">
+                      <span className="px-2 py-0.5 rounded bg-zinc-800 text-[11px] font-semibold text-zinc-300">
                         Round {m.round}
                       </span>
                       {m.grup && (
-                        <span className="px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 text-[10px] font-semibold">
+                        <span className="px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 text-[11px] font-semibold">
                           {m.grup}
                         </span>
                       )}
@@ -102,7 +102,7 @@ export default async function PublicSchedulePage({
 
                   <div>
                     <span
-                      className={`px-2.5 py-1 rounded-full text-[10px] font-bold capitalize ${
+                      className={`px-2.5 py-1 rounded-full text-[11px] font-bold capitalize ${
                         m.status === "selesai"
                           ? "bg-emerald-500/20 text-emerald-400"
                           : m.status === "ongoing"
@@ -129,7 +129,7 @@ export default async function PublicSchedulePage({
                           key={s.slot}
                           className="p-2.5 bg-zinc-950 border border-zinc-800/80 rounded-xl flex items-center gap-2"
                         >
-                          <span className="w-5 h-5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[10px] font-bold flex items-center justify-center shrink-0">
+                          <span className="w-5 h-5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[11px] font-bold flex items-center justify-center shrink-0">
                             #{s.slot}
                           </span>
                           <span className="font-semibold text-zinc-200 truncate">

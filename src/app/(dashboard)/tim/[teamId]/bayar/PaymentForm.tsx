@@ -124,8 +124,8 @@ export default function PaymentForm({ teamId, isFree }: PaymentFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-6 bg-zinc-900/60 border border-zinc-800 rounded-2xl space-y-4">
-      <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+    <form onSubmit={handleSubmit} className="card-glow p-6 rounded-2xl space-y-4">
+      <h3 className="text-sm text-white uppercase flex items-center gap-2">
         <UploadCloud className="w-4 h-4 text-amber-500" />
         {isFree ? "Pengajuan Verifikasi Tim" : "Unggah Bukti Transfer"}
       </h3>

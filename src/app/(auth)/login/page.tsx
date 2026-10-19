@@ -84,7 +84,7 @@ function LoginForm() {
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h2 className="text-xl font-bold text-white tracking-tight">
+        <h2 className="text-xl text-white tracking-tight">
           Masuk ke Akun Anda
         </h2>
         <p className="text-xs text-zinc-400 mt-1">
@@ -110,7 +110,7 @@ function LoginForm() {
             type="email"
             placeholder="kapten@gmail.com"
             disabled={isSubmitting}
-            className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none transition-colors ${
+            className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none transition-colors ${
               errors.email
                 ? "border-red-500/80 focus:border-red-500"
                 : "border-zinc-800 focus:border-amber-500"
@@ -140,7 +140,7 @@ function LoginForm() {
               type={showPassword ? "text" : "password"}
               placeholder="Masukkan password"
               disabled={isSubmitting}
-              className={`w-full px-3.5 py-2.5 pr-10 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none transition-colors ${
+              className={`w-full px-3.5 py-2.5 pr-10 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none transition-colors ${
                 errors.password
                   ? "border-red-500/80 focus:border-red-500"
                   : "border-zinc-800 focus:border-amber-500"

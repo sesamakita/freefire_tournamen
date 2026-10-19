@@ -93,14 +93,14 @@ export default async function TeamRosterPage({
       </div>
 
       {/* Header Tim & Turnamen */}
-      <div className="p-6 bg-zinc-900/90 border border-zinc-800 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="card-glow p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-black text-white tracking-tight">
+            <h1 className="text-3xl text-white tracking-tight">
               {team.nama}
             </h1>
             {isCaptain && (
-              <span className="px-2 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[10px] font-bold uppercase">
+              <span className="px-2 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[11px] font-bold uppercase">
                 Kapten
               </span>
             )}
@@ -183,9 +183,9 @@ export default async function TeamRosterPage({
       </div>
 
       {/* Tabel Roster Saat Ini */}
-      <div className="p-6 bg-zinc-900/60 border border-zinc-800 rounded-2xl space-y-4">
+      <div className="card-glow p-6 rounded-2xl space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+          <h2 className="text-sm text-white uppercase flex items-center gap-2">
             <Users className="w-4 h-4 text-amber-500" />
             Susunan Roster Tim
           </h2>
@@ -210,12 +210,12 @@ export default async function TeamRosterPage({
                         {member.ign}
                       </p>
                       {isMemberCaptain && (
-                        <span className="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400 text-[10px] font-bold">
+                        <span className="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400 text-[11px] font-bold">
                           Kapten
                         </span>
                       )}
                       {member.is_substitute && (
-                        <span className="px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-400 text-[10px] font-bold">
+                        <span className="px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-400 text-[11px] font-bold">
                           Cadangan
                         </span>
                       )}
@@ -227,7 +227,7 @@ export default async function TeamRosterPage({
                 </div>
 
                 <div className="flex items-center gap-3 text-xs">
-                  <span className="px-2.5 py-1 rounded-md bg-zinc-800 text-zinc-300 font-semibold uppercase tracking-wider text-[10px]">
+                  <span className="px-2.5 py-1 rounded-md bg-zinc-800 text-zinc-300 font-semibold uppercase tracking-wider text-[11px]">
                     {member.role_tim}
                   </span>
                 </div>

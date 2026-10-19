@@ -114,7 +114,7 @@ export default function VerifyTeamActions({
       {showRejectModal && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
-            <h3 className="text-base font-bold text-white">
+            <h3 className="text-base text-white">
               Tolak Pendaftaran Tim: {teamNama}
             </h3>
             <p className="text-xs text-zinc-400">
@@ -131,7 +131,7 @@ export default function VerifyTeamActions({
                   onChange={(e) => setRejectReason(e.target.value)}
                   rows={3}
                   placeholder="Contoh: Bukti transfer tidak terbaca / nominal tidak sesuai / UID salah."
-                  className="w-full px-3 py-2 bg-zinc-950 border border-zinc-800 rounded-xl text-xs text-zinc-100 placeholder:text-zinc-600 focus:outline-none focus:border-red-500 transition-colors"
+                  className="w-full px-3 py-2 bg-zinc-950 border border-zinc-800 rounded-xl text-xs text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-red-500 transition-colors"
                   disabled={isLoading}
                   required
                 />

@@ -79,16 +79,16 @@ export default async function AdminMatchPage({
         </Link>
       </div>
 
-      <div className="p-6 bg-zinc-900/90 border border-zinc-800 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="card-glow p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-500 flex items-center justify-center">
             <Calendar className="w-6 h-6" />
           </div>
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-wider text-amber-500">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-amber-500">
               Panel Panitia (Peran: {staff.role})
             </span>
-            <h1 className="text-xl font-black text-white tracking-tight mt-0.5">
+            <h1 className="text-3xl text-white tracking-tight mt-0.5">
               Kelola Jadwal, Room ID & Slot Tim: {tournament.nama}
             </h1>
           </div>

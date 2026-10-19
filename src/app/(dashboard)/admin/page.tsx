@@ -84,13 +84,13 @@ export default async function AdminHubPage() {
   return (
     <div className="max-w-5xl mx-auto space-y-8">
       {/* Header Admin Hub */}
-      <div className="p-6 bg-zinc-900/90 border border-zinc-800 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="card-glow p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-600 flex items-center justify-center text-zinc-950 shadow-lg shadow-amber-500/20">
             <Shield className="w-6 h-6 stroke-[2.5]" />
           </div>
           <div>
-            <h1 className="text-2xl font-black text-white tracking-tight">
+            <h1 className="text-3xl text-white tracking-tight">
               Portal Panitia Turnamen
             </h1>
             <p className="text-xs text-zinc-400 mt-0.5">
@@ -113,7 +113,7 @@ export default async function AdminHubPage() {
       {/* Daftar Turnamen yang Dikelola */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-base font-bold text-white flex items-center gap-2">
+          <h2 className="text-base text-white flex items-center gap-2">
             <Trophy className="w-4 h-4 text-amber-500" />
             Turnamen yang Anda Kelola ({tournamentsManaged.length})
           </h2>
@@ -128,14 +128,14 @@ export default async function AdminHubPage() {
               return (
                 <div
                   key={t.id}
-                  className="p-6 bg-zinc-900/80 border border-zinc-800 hover:border-zinc-700 rounded-2xl space-y-5 transition-all shadow-lg"
+                  className="card-glow card-glow-hover p-6 rounded-2xl space-y-5 transition-all"
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div>
-                      <span className="px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-[10px] font-bold uppercase">
+                      <span className="px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-[11px] font-bold uppercase">
                         Peran: {t.myRole}
                       </span>
-                      <h3 className="text-lg font-black text-white tracking-tight mt-1.5">
+                      <h3 className="text-lg text-white tracking-tight mt-1.5">
                         {t.nama}
                       </h3>
                       <p className="text-xs text-zinc-400">
@@ -144,7 +144,7 @@ export default async function AdminHubPage() {
                     </div>
 
                     {pendingCount > 0 && (
-                      <span className="px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-bold animate-pulse flex items-center gap-1">
+                      <span className="px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[11px] font-bold animate-pulse flex items-center gap-1">
                         <Clock className="w-3 h-3" /> {pendingCount} Pending
                       </span>
                     )}
@@ -158,7 +158,7 @@ export default async function AdminHubPage() {
                     >
                       <Users className="w-4 h-4 text-amber-500 mx-auto" />
                       <p className="text-[11px] font-bold text-white">Verifikasi</p>
-                      <p className="text-[10px] text-zinc-500">{pendingCount} Tim</p>
+                      <p className="text-[11px] text-zinc-500">{pendingCount} Tim</p>
                     </Link>
 
                     <Link
@@ -167,7 +167,7 @@ export default async function AdminHubPage() {
                     >
                       <Calendar className="w-4 h-4 text-blue-400 mx-auto" />
                       <p className="text-[11px] font-bold text-white">Match & Room</p>
-                      <p className="text-[10px] text-zinc-500">{matchesCount} Match</p>
+                      <p className="text-[11px] text-zinc-500">{matchesCount} Match</p>
                     </Link>
 
                     <Link
@@ -176,7 +176,7 @@ export default async function AdminHubPage() {
                     >
                       <Trophy className="w-4 h-4 text-emerald-400 mx-auto" />
                       <p className="text-[11px] font-bold text-white">Input Skor</p>
-                      <p className="text-[10px] text-zinc-500">Dual Control</p>
+                      <p className="text-[11px] text-zinc-500">Dual Control</p>
                     </Link>
                   </div>
 

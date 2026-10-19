@@ -67,7 +67,7 @@ export default function ForgotPasswordPage() {
           <CheckCircle2 className="w-6 h-6" />
         </div>
         <div>
-          <h2 className="text-lg font-bold text-white">Email Pemulihan Terkirim</h2>
+          <h2 className="text-lg text-white">Email Pemulihan Terkirim</h2>
           <p className="text-xs text-zinc-400 mt-2 leading-relaxed">
             Kami telah mengirim instruksi reset kata sandi ke{" "}
             <span className="font-semibold text-zinc-200">{sentEmail}</span>.
@@ -90,7 +90,7 @@ export default function ForgotPasswordPage() {
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h2 className="text-xl font-bold text-white tracking-tight">
+        <h2 className="text-xl text-white tracking-tight">
           Lupa Kata Sandi?
         </h2>
         <p className="text-xs text-zinc-400 mt-1">
@@ -115,7 +115,7 @@ export default function ForgotPasswordPage() {
             type="email"
             placeholder="kapten@gmail.com"
             disabled={isSubmitting}
-            className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none transition-colors ${
+            className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none transition-colors ${
               errors.email
                 ? "border-red-500/80 focus:border-red-500"
                 : "border-zinc-800 focus:border-amber-500"

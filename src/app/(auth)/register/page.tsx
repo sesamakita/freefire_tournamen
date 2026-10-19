@@ -84,7 +84,7 @@ export default function RegisterPage() {
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h2 className="text-xl font-bold text-white tracking-tight">
+        <h2 className="text-xl text-white tracking-tight">
           Buat Akun ArenaKu
         </h2>
         <p className="text-xs text-zinc-400 mt-1">
@@ -110,7 +110,7 @@ export default function RegisterPage() {
             type="text"
             placeholder="Contoh: Budi Santoso"
             disabled={isSubmitting}
-            className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none transition-colors ${
+            className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none transition-colors ${
               errors.nama
                 ? "border-red-500/80 focus:border-red-500"
                 : "border-zinc-800 focus:border-amber-500"
@@ -131,7 +131,7 @@ export default function RegisterPage() {
             type="email"
             placeholder="kapten@gmail.com"
             disabled={isSubmitting}
-            className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none transition-colors ${
+            className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none transition-colors ${
               errors.email
                 ? "border-red-500/80 focus:border-red-500"
                 : "border-zinc-800 focus:border-amber-500"
@@ -152,7 +152,7 @@ export default function RegisterPage() {
             type="tel"
             placeholder="081234567890"
             disabled={isSubmitting}
-            className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none transition-colors ${
+            className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none transition-colors ${
               errors.no_wa
                 ? "border-red-500/80 focus:border-red-500"
                 : "border-zinc-800 focus:border-amber-500"
@@ -178,7 +178,7 @@ export default function RegisterPage() {
               type={showPassword ? "text" : "password"}
               placeholder="Minimal 8 karakter (huruf & angka)"
               disabled={isSubmitting}
-              className={`w-full px-3.5 py-2.5 pr-10 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none transition-colors ${
+              className={`w-full px-3.5 py-2.5 pr-10 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none transition-colors ${
                 errors.password
                   ? "border-red-500/80 focus:border-red-500"
                   : "border-zinc-800 focus:border-amber-500"
@@ -213,7 +213,7 @@ export default function RegisterPage() {
               type={showConfirmPassword ? "text" : "password"}
               placeholder="Ketik ulang password"
               disabled={isSubmitting}
-              className={`w-full px-3.5 py-2.5 pr-10 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none transition-colors ${
+              className={`w-full px-3.5 py-2.5 pr-10 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none transition-colors ${
                 errors.konfirmasi_password
                   ? "border-red-500/80 focus:border-red-500"
                   : "border-zinc-800 focus:border-amber-500"

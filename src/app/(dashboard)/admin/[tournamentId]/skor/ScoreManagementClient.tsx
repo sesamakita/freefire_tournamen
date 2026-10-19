@@ -241,7 +241,7 @@ export default function ScoreManagementClient({
   return (
     <div className="space-y-6">
       {/* Selector Match */}
-      <div className="p-4 bg-zinc-900 border border-zinc-800 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+      <div className="card-glow p-4 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <label className="text-xs font-bold text-zinc-300">Pilih Match yang Diatur:</label>
         <select
           value={selectedMatchId}
@@ -261,10 +261,10 @@ export default function ScoreManagementClient({
         <div className="p-6 bg-amber-500/10 border border-amber-500/30 rounded-2xl space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400 bg-amber-500/20 px-2 py-0.5 rounded">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-amber-400 bg-amber-500/20 px-2 py-0.5 rounded">
                 Menunggu Verifikasi Dual-Control (SCR-S02)
               </span>
-              <h3 className="text-base font-black text-white mt-1">
+              <h3 className="text-base text-white mt-1">
                 Hasil Pertandingan Menunggu Persetujuan Admin
               </h3>
               <p className="text-xs text-zinc-400">
@@ -337,13 +337,13 @@ export default function ScoreManagementClient({
 
       {/* Bagian 2: Hasil Skor Resmi (Approved) */}
       {isApproved && (
-        <div className="p-6 bg-zinc-900/60 border border-zinc-800 rounded-2xl space-y-4">
+        <div className="card-glow p-6 rounded-2xl space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+            <h3 className="text-sm text-white uppercase flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-400" />
               Skor Resmi Pertandingan Ini (Telah Disetujui)
             </h3>
-            <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-bold">
+            <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[11px] font-bold">
               Match Selesai
             </span>
           </div>
@@ -369,9 +369,9 @@ export default function ScoreManagementClient({
 
       {/* Bagian 3: Form Input Skor Baru (SCR-S01) */}
       {!isApproved && (
-        <form onSubmit={handleSubmitScores} className="p-6 bg-zinc-900/80 border border-zinc-800 rounded-2xl space-y-6">
+        <form onSubmit={handleSubmitScores} className="card-glow p-6 rounded-2xl space-y-6">
           <div>
-            <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+            <h3 className="text-sm text-white uppercase flex items-center gap-2">
               <Trophy className="w-4 h-4 text-amber-500" />
               Input Hasil Pertandingan (SCR-S01)
             </h3>
@@ -426,7 +426,7 @@ export default function ScoreManagementClient({
                   >
                     <div className="col-span-5">
                       <span className="font-bold text-white">{mt.teams?.nama}</span>
-                      <span className="text-zinc-500 text-[10px] block">Slot #{mt.slot}</span>
+                      <span className="text-zinc-500 text-[11px] block">Slot #{mt.slot}</span>
                     </div>
 
                     <div className="col-span-3">
@@ -493,7 +493,7 @@ export default function ScoreManagementClient({
       {showRejectModal && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
-            <h3 className="text-base font-bold text-white">Tolak Hasil Skor Pertandingan</h3>
+            <h3 className="text-base text-white">Tolak Hasil Skor Pertandingan</h3>
             <p className="text-xs text-zinc-400">
               Tuliskan alasan penolakan agar panitia yang menginput dapat mengunggah atau memperbaiki skor yang benar.
             </p>

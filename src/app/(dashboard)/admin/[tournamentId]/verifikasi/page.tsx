@@ -82,16 +82,16 @@ export default async function AdminVerificationPage({
       </div>
 
       {/* Header Turnamen */}
-      <div className="p-6 bg-zinc-900/90 border border-zinc-800 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="card-glow p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-500 flex items-center justify-center">
             <Shield className="w-6 h-6" />
           </div>
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-wider text-amber-500">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-amber-500">
               Panel Panitia (Peran: {staff.role})
             </span>
-            <h1 className="text-xl font-black text-white tracking-tight mt-0.5">
+            <h1 className="text-3xl text-white tracking-tight mt-0.5">
               Antrean Verifikasi Tim: {tournament.nama}
             </h1>
           </div>
@@ -107,7 +107,7 @@ export default async function AdminVerificationPage({
       {/* 1. Antrean Verifikasi (Pending) */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-base font-bold text-white flex items-center gap-2">
+          <h2 className="text-base text-white flex items-center gap-2">
             <Clock className="w-4 h-4 text-amber-400" />
             Menunggu Persetujuan Panitia ({pendingTeams.length})
           </h2>
@@ -129,7 +129,7 @@ export default async function AdminVerificationPage({
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-3 border-b border-zinc-800">
                     <div>
-                      <h3 className="text-lg font-black text-white tracking-tight">
+                      <h3 className="text-lg text-white tracking-tight">
                         {team.nama}
                       </h3>
                       <p className="text-xs text-zinc-400 mt-0.5 flex items-center gap-2">
@@ -219,7 +219,7 @@ export default async function AdminVerificationPage({
 
       {/* 2. Tim yang Sudah Disetujui (Approved) */}
       <div className="space-y-4 pt-4 border-t border-zinc-800">
-        <h2 className="text-base font-bold text-white flex items-center gap-2">
+        <h2 className="text-base text-white flex items-center gap-2">
           <CheckCircle2 className="w-4 h-4 text-emerald-400" />
           Tim Resmi Terdaftar ({approvedTeams.length})
         </h2>
@@ -232,8 +232,8 @@ export default async function AdminVerificationPage({
                 className="p-4 bg-zinc-900/60 border border-zinc-800 rounded-xl space-y-1"
               >
                 <div className="flex items-center justify-between">
-                  <h3 className="font-bold text-white">{team.nama}</h3>
-                  <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-bold">
+                  <h3 className="text-white">{team.nama}</h3>
+                  <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-[11px] font-bold">
                     Resmi
                   </span>
                 </div>
@@ -254,7 +254,7 @@ export default async function AdminVerificationPage({
       {/* 3. Tim Ditolak (Rejected) */}
       {rejectedTeams.length > 0 && (
         <div className="space-y-4 pt-4 border-t border-zinc-800">
-          <h2 className="text-base font-bold text-zinc-400 flex items-center gap-2">
+          <h2 className="text-base text-zinc-400 flex items-center gap-2">
             <XCircle className="w-4 h-4 text-red-400" />
             Tim yang Ditolak ({rejectedTeams.length})
           </h2>
@@ -266,8 +266,8 @@ export default async function AdminVerificationPage({
                 className="p-4 bg-red-500/5 border border-red-500/20 rounded-xl space-y-1"
               >
                 <div className="flex items-center justify-between">
-                  <h3 className="font-bold text-white">{team.nama}</h3>
-                  <span className="text-[10px] font-bold text-red-400">Ditolak</span>
+                  <h3 className="text-white">{team.nama}</h3>
+                  <span className="text-[11px] font-bold text-red-400">Ditolak</span>
                 </div>
                 <p className="text-zinc-400">Kapten: {team.users?.nama}</p>
                 {team.rejection_reason && (

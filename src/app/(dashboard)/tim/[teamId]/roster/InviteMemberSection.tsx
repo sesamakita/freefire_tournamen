@@ -100,9 +100,9 @@ export default function InviteMemberSection({
   return (
     <div className="space-y-6">
       {/* Form Kirim Undangan Anggota Baru */}
-      <div className="p-6 bg-zinc-900/60 border border-zinc-800 rounded-2xl space-y-4">
+      <div className="card-glow p-6 rounded-2xl space-y-4">
         <div>
-          <h2 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+          <h2 className="text-sm text-white uppercase flex items-center gap-2">
             <UserPlus className="w-4 h-4 text-amber-500" />
             Undang Pemain Baru ke Roster (SCR-T07)
           </h2>
@@ -135,7 +135,7 @@ export default function InviteMemberSection({
                   type="email"
                   placeholder="pemain@gmail.com"
                   disabled={isSubmitting}
-                  className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none transition-colors ${
+                  className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none transition-colors ${
                     errors.invited_email
                       ? "border-red-500/80 focus:border-red-500"
                       : "border-zinc-800 focus:border-amber-500"
@@ -158,7 +158,7 @@ export default function InviteMemberSection({
                   type="text"
                   placeholder="Contoh: GRD・Sniper"
                   disabled={isSubmitting}
-                  className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none transition-colors ${
+                  className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none transition-colors ${
                     errors.ign
                       ? "border-red-500/80 focus:border-red-500"
                       : "border-zinc-800 focus:border-amber-500"
@@ -179,7 +179,7 @@ export default function InviteMemberSection({
                   type="text"
                   placeholder="Contoh: 987654321"
                   disabled={isSubmitting}
-                  className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none transition-colors ${
+                  className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none transition-colors ${
                     errors.uid_game
                       ? "border-red-500/80 focus:border-red-500"
                       : "border-zinc-800 focus:border-amber-500"
@@ -256,9 +256,9 @@ export default function InviteMemberSection({
 
       {/* Daftar Undangan yang Telah Terkirim */}
       {invitations && invitations.length > 0 && (
-        <div className="p-6 bg-zinc-900/60 border border-zinc-800 rounded-2xl space-y-4">
+        <div className="card-glow p-6 rounded-2xl space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+            <h3 className="text-sm text-white uppercase flex items-center gap-2">
               <Mail className="w-4 h-4 text-zinc-400" />
               Riwayat Undangan Roster ({invitations.length})
             </h3>
@@ -278,7 +278,7 @@ export default function InviteMemberSection({
                       <span className="text-zinc-500">&bull;</span>
                       <span className="text-zinc-400">{inv.invited_email}</span>
                       {inv.is_substitute && (
-                        <span className="px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-400 text-[10px] font-bold">
+                        <span className="px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-400 text-[11px] font-bold">
                           Cadangan
                         </span>
                       )}
@@ -291,7 +291,7 @@ export default function InviteMemberSection({
                   <div className="flex items-center gap-2.5">
                     {/* Status Badge */}
                     <span
-                      className={`px-2 py-0.5 rounded-full text-[10px] font-bold capitalize ${
+                      className={`px-2 py-0.5 rounded-full text-[11px] font-bold capitalize ${
                         inv.status === "accepted"
                           ? "bg-emerald-500/20 text-emerald-400"
                           : inv.status === "declined"

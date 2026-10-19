@@ -108,7 +108,7 @@ export default async function DashboardPage() {
       {/* Header Greeting */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+          <h1 className="text-2xl sm:text-3xl text-white tracking-tight">
             Selamat Datang,{" "}
             <span className="text-amber-500">
               {profile?.nama || user.email?.split("@")[0]}
@@ -171,7 +171,7 @@ export default async function DashboardPage() {
       {/* Tim yang Dikelola sebagai Kapten */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-base font-bold text-white flex items-center gap-2">
+          <h2 className="text-base text-white flex items-center gap-2">
             <Trophy className="w-4 h-4 text-amber-500" />
             Tim Turnamen Saya (Sebagai Kapten)
           </h2>
@@ -185,11 +185,11 @@ export default async function DashboardPage() {
             {captainTeams.map((team: any) => (
               <div
                 key={team.id}
-                className="p-5 bg-zinc-900/90 border border-zinc-800 hover:border-zinc-700 rounded-2xl space-y-4 transition-all"
+                className="card-glow card-glow-hover p-5 rounded-2xl space-y-4 transition-all"
               >
                 <div className="flex items-start justify-between gap-2">
                   <div>
-                    <h3 className="font-extrabold text-base text-white tracking-tight">
+                    <h3 className="text-base text-white tracking-tight">
                       {team.nama}
                     </h3>
                     <p className="text-xs text-zinc-400 mt-0.5">
@@ -199,22 +199,22 @@ export default async function DashboardPage() {
                   </div>
                   <div>
                     {team.verification_status === "approved" && (
-                      <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold flex items-center gap-1">
+                      <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[11px] font-bold flex items-center gap-1">
                         <CheckCircle2 className="w-3 h-3" /> Terverifikasi
                       </span>
                     )}
                     {team.verification_status === "pending" && (
-                      <span className="px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[10px] font-bold flex items-center gap-1">
+                      <span className="px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[11px] font-bold flex items-center gap-1">
                         <Clock className="w-3 h-3" /> Menunggu Verifikasi
                       </span>
                     )}
                     {team.verification_status === "rejected" && (
-                      <span className="px-2.5 py-1 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-[10px] font-bold flex items-center gap-1">
+                      <span className="px-2.5 py-1 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-[11px] font-bold flex items-center gap-1">
                         <XCircle className="w-3 h-3" /> Ditolak
                       </span>
                     )}
                     {team.verification_status === "draft" && (
-                      <span className="px-2.5 py-1 rounded-full bg-zinc-800 text-zinc-400 text-[10px] font-bold">
+                      <span className="px-2.5 py-1 rounded-full bg-zinc-800 text-zinc-400 text-[11px] font-bold">
                         Draft
                       </span>
                     )}
@@ -271,7 +271,7 @@ export default async function DashboardPage() {
       {/* Tim Sebagai Anggota */}
       {memberTeams && memberTeams.length > 0 && (
         <div className="space-y-4 pt-4 border-t border-zinc-800/80">
-          <h2 className="text-base font-bold text-white flex items-center gap-2">
+          <h2 className="text-base text-white flex items-center gap-2">
             <Users className="w-4 h-4 text-zinc-400" />
             Tim di mana Saya Bergabung
           </h2>
@@ -279,9 +279,9 @@ export default async function DashboardPage() {
             {memberTeams.map((membership: any, idx: number) => (
               <div
                 key={idx}
-                className="p-5 bg-zinc-900/60 border border-zinc-800 rounded-2xl space-y-2"
+                className="card-glow p-5 rounded-2xl space-y-2"
               >
-                <h3 className="font-bold text-white">{membership.teams?.nama}</h3>
+                <h3 className="text-white">{membership.teams?.nama}</h3>
                 <p className="text-xs text-zinc-400">
                   Role: <span className="text-amber-400 font-semibold capitalize">{membership.role_tim}</span>{" "}
                   {membership.is_substitute && "(Cadangan)"}
@@ -298,7 +298,7 @@ export default async function DashboardPage() {
       {/* Panel Panitia / Admin (Jika Ada) */}
       {staffList && staffList.length > 0 && (
         <div className="space-y-4 pt-4 border-t border-zinc-800/80">
-          <h2 className="text-base font-bold text-amber-400 flex items-center gap-2">
+          <h2 className="text-base text-amber-400 flex items-center gap-2">
             <Shield className="w-4 h-4" />
             Akses Panitia Turnamen
           </h2>
@@ -310,7 +310,7 @@ export default async function DashboardPage() {
               >
                 <div>
                   
-                  <h3 className="font-bold text-white">{st.tournaments?.nama}</h3>
+                  <h3 className="text-white">{st.tournaments?.nama}</h3>
                   <p className="text-xs text-amber-400 font-medium capitalize mt-0.5">
                     Peran: {st.role}
                   </p>

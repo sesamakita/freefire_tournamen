@@ -25,7 +25,7 @@ export default async function PublicTournamentLayout(props: any) {
             <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-amber-500 to-orange-600 flex items-center justify-center shadow-md shadow-amber-500/20 group-hover:scale-105 transition-transform">
               <Trophy className="w-4 h-4 text-zinc-950 stroke-[2.5]" />
             </div>
-            <span className="text-lg font-black tracking-tight text-white uppercase italic font-headline">
+            <span className="text-lg font-black tracking-tight text-white uppercase font-headline">
               Arena<span className="text-amber-500">Ku</span>
             </span>
           </Link>
@@ -55,10 +55,10 @@ export default async function PublicTournamentLayout(props: any) {
               <Trophy className="w-5 h-5" />
             </div>
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
                 Status: {tournament.status}
               </span>
-              <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight mt-1">
+              <h1 className="text-2xl sm:text-3xl text-white tracking-tight mt-1">
                 {tournament.nama}
               </h1>
             </div>
@@ -97,7 +97,7 @@ export default async function PublicTournamentLayout(props: any) {
       </main>
 
       {/* Public Footer */}
-      <footer className="border-t border-zinc-900 py-6 text-center text-xs text-zinc-600">
+      <footer className="border-t border-zinc-900 py-6 text-center text-xs text-zinc-500">
         <p>&copy; 2026 ArenaKu &bull; Satu Sumber Kebenaran untuk Turnamen Free Fire</p>
       </footer>
     </div>

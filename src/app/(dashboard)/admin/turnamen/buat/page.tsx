@@ -94,7 +94,7 @@ export default function CreateTournamentPage() {
             <Trophy className="w-5 h-5" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-white tracking-tight">
+            <h1 className="text-2xl text-white tracking-tight">
               Buka Turnamen Baru
             </h1>
             <p className="text-xs text-zinc-400 mt-0.5">
@@ -112,7 +112,7 @@ export default function CreateTournamentPage() {
       )}
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        <div className="p-6 bg-zinc-900/60 border border-zinc-800 rounded-2xl space-y-4">
+        <div className="card-glow p-6 rounded-2xl space-y-4">
           {/* Nama Turnamen */}
           <div>
             <label className="block text-xs font-semibold text-zinc-300 mb-1.5">
@@ -124,7 +124,7 @@ export default function CreateTournamentPage() {
               type="text"
               placeholder="Contoh: ArenaKu Free Fire Championship Season 1"
               disabled={isSubmitting}
-              className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none transition-colors ${
+              className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none transition-colors ${
                 errors.nama ? "border-red-500/80 focus:border-red-500" : "border-zinc-800 focus:border-amber-500"
               }`}
             />
@@ -147,7 +147,7 @@ export default function CreateTournamentPage() {
                 type="text"
                 placeholder="affc-s1"
                 disabled={isSubmitting}
-                className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-r-xl text-sm font-mono text-zinc-100 placeholder:text-zinc-600 focus:outline-none transition-colors ${
+                className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-r-xl text-sm font-mono text-zinc-100 placeholder:text-zinc-500 focus:outline-none transition-colors ${
                   errors.slug ? "border-red-500/80 focus:border-red-500" : "border-zinc-800 focus:border-amber-500"
                 }`}
               />
@@ -167,7 +167,7 @@ export default function CreateTournamentPage() {
               rows={3}
               placeholder="Tuliskan info format kualifikasi, jadwal technical meeting, atau hadiah..."
               disabled={isSubmitting}
-              className="w-full px-3.5 py-2.5 bg-zinc-950 border border-zinc-800 rounded-xl text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none focus:border-amber-500 transition-colors"
+              className="w-full px-3.5 py-2.5 bg-zinc-950 border border-zinc-800 rounded-xl text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-amber-500 transition-colors"
             />
           </div>
 
@@ -184,7 +184,7 @@ export default function CreateTournamentPage() {
                 step="5000"
                 placeholder="0"
                 disabled={isSubmitting}
-                className="w-full px-3.5 py-2.5 bg-zinc-950 border border-zinc-800 rounded-xl text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none focus:border-amber-500 transition-colors"
+                className="w-full px-3.5 py-2.5 bg-zinc-950 border border-zinc-800 rounded-xl text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-amber-500 transition-colors"
               />
               <p className="text-[11px] text-zinc-500 mt-1">
                 Isi 0 jika turnamen gratis (tim otomatis terverifikasi tanpa bayar).
@@ -202,7 +202,7 @@ export default function CreateTournamentPage() {
                 max="64"
                 placeholder="32"
                 disabled={isSubmitting}
-                className="w-full px-3.5 py-2.5 bg-zinc-950 border border-zinc-800 rounded-xl text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none focus:border-amber-500 transition-colors"
+                className="w-full px-3.5 py-2.5 bg-zinc-950 border border-zinc-800 rounded-xl text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-amber-500 transition-colors"
               />
               <p className="text-[11px] text-zinc-500 mt-1">
                 Standar Battle Royale: 12, 24, 32, atau 48 tim.

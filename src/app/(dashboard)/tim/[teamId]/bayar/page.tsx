@@ -69,7 +69,7 @@ export default async function TeamPaymentPage({
             <CreditCard className="w-5 h-5" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-white tracking-tight">
+            <h1 className="text-2xl text-white tracking-tight">
               Pembayaran & Verifikasi Tim (SCR-T03)
             </h1>
             <p className="text-xs text-zinc-400 mt-0.5">
@@ -80,8 +80,8 @@ export default async function TeamPaymentPage({
       </div>
 
       {/* Rincian Biaya */}
-      <div className="p-6 bg-zinc-900/60 border border-zinc-800 rounded-2xl space-y-4">
-        <h2 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+      <div className="card-glow p-6 rounded-2xl space-y-4">
+        <h2 className="text-sm text-white uppercase flex items-center gap-2">
           <Shield className="w-4 h-4 text-amber-500" />
           Rincian Turnamen
         </h2>
@@ -113,8 +113,8 @@ export default async function TeamPaymentPage({
 
       {/* Petunjuk QRIS Manual (Jika Berbayar) */}
       {!isFree && (
-        <div className="p-6 bg-zinc-900/60 border border-zinc-800 rounded-2xl space-y-4">
-          <h2 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+        <div className="card-glow p-6 rounded-2xl space-y-4">
+          <h2 className="text-sm text-white uppercase flex items-center gap-2">
             <QrCode className="w-4 h-4 text-amber-500" />
             Panduan Pembayaran QRIS Manual
           </h2>

@@ -110,7 +110,7 @@ export default function RoomCard({
         <div className="p-3 bg-zinc-900 border border-amber-500/30 rounded-xl space-y-3">
           <div className="grid grid-cols-2 gap-3 text-xs">
             <div>
-              <p className="text-[10px] uppercase font-bold text-zinc-500 tracking-wider">Room ID</p>
+              <p className="text-[11px] uppercase font-bold text-zinc-500 tracking-wider">Room ID</p>
               <div className="flex items-center justify-between mt-0.5">
                 <span className="font-mono text-base font-black text-white">{roomData.room_id}</span>
                 <button
@@ -129,7 +129,7 @@ export default function RoomCard({
             </div>
 
             <div>
-              <p className="text-[10px] uppercase font-bold text-zinc-500 tracking-wider">Password</p>
+              <p className="text-[11px] uppercase font-bold text-zinc-500 tracking-wider">Password</p>
               <div className="flex items-center justify-between mt-0.5">
                 <span className="font-mono text-base font-black text-amber-400">{roomData.room_pass}</span>
                 <button
@@ -148,7 +148,7 @@ export default function RoomCard({
             </div>
           </div>
 
-          <p className="text-[10px] text-zinc-400 italic">
+          <p className="text-[11px] text-zinc-400 italic">
             ⚠️ Masuk ke room game Free Fire dan pilih <strong>Slot #{slotNumber || "sesuai panitia"}</strong>. Dilarang menyebarkan Room ID ke tim lain.
           </p>
         </div>

@@ -114,7 +114,7 @@ export default function CreateTeamPage() {
             <Trophy className="w-5 h-5" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-white tracking-tight">
+            <h1 className="text-2xl text-white tracking-tight">
               Pendaftaran Tim Turnamen
             </h1>
             <p className="text-xs text-zinc-400 mt-0.5">
@@ -138,7 +138,7 @@ export default function CreateTeamPage() {
             <Trophy className="w-6 h-6" />
           </div>
           <div>
-            <h3 className="text-base font-bold text-white">Belum Ada Turnamen yang Dibuka</h3>
+            <h3 className="text-base text-white">Belum Ada Turnamen yang Dibuka</h3>
             <p className="text-xs text-zinc-400 max-w-sm mx-auto mt-1">
               Saat ini belum ada turnamen yang membuka pendaftaran tim. Silakan buat turnamen baru jika Anda adalah penyelenggara.
             </p>
@@ -154,8 +154,8 @@ export default function CreateTeamPage() {
       ) : (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           {/* Bagian 1: Informasi Tim & Turnamen */}
-          <div className="p-6 bg-zinc-900/60 border border-zinc-800 rounded-2xl space-y-4">
-            <h2 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+          <div className="card-glow p-6 rounded-2xl space-y-4">
+            <h2 className="text-sm text-white uppercase flex items-center gap-2">
               <Shield className="w-4 h-4 text-amber-500" />
               1. Turnamen & Identitas Tim
             </h2>
@@ -191,7 +191,7 @@ export default function CreateTeamPage() {
                 type="text"
                 placeholder="Contoh: GARUDA ESPORTS"
                 disabled={isSubmitting}
-                className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none transition-colors ${
+                className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none transition-colors ${
                   errors.nama
                     ? "border-red-500/80 focus:border-red-500"
                     : "border-zinc-800 focus:border-amber-500"
@@ -216,14 +216,14 @@ export default function CreateTeamPage() {
                 type="url"
                 placeholder="https://..."
                 disabled={isSubmitting}
-                className="w-full px-3.5 py-2.5 bg-zinc-950 border border-zinc-800 rounded-xl text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none focus:border-amber-500 transition-colors"
+                className="w-full px-3.5 py-2.5 bg-zinc-950 border border-zinc-800 rounded-xl text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-amber-500 transition-colors"
               />
             </div>
           </div>
 
           {/* Bagian 2: Data Kapten di Roster */}
-          <div className="p-6 bg-zinc-900/60 border border-zinc-800 rounded-2xl space-y-4">
-            <h2 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+          <div className="card-glow p-6 rounded-2xl space-y-4">
+            <h2 className="text-sm text-white uppercase flex items-center gap-2">
               <Trophy className="w-4 h-4 text-amber-500" />
               2. Data Game Kapten (Pemain 1 / Inti)
             </h2>
@@ -239,7 +239,7 @@ export default function CreateTeamPage() {
                   type="text"
                   placeholder="Contoh: GRD・Captain"
                   disabled={isSubmitting}
-                  className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none transition-colors ${
+                  className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none transition-colors ${
                     errors.kapten_ign
                       ? "border-red-500/80 focus:border-red-500"
                       : "border-zinc-800 focus:border-amber-500"
@@ -260,7 +260,7 @@ export default function CreateTeamPage() {
                   type="text"
                   placeholder="Contoh: 123456789"
                   disabled={isSubmitting}
-                  className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none transition-colors ${
+                  className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none transition-colors ${
                     errors.kapten_uid
                       ? "border-red-500/80 focus:border-red-500"
                       : "border-zinc-800 focus:border-amber-500"

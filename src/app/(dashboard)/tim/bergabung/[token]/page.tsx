@@ -59,7 +59,7 @@ export default async function AcceptInvitationPage({
         <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-500 to-orange-600 flex items-center justify-center mx-auto shadow-lg shadow-amber-500/20">
           <Trophy className="w-6 h-6 text-zinc-950 stroke-[2.5]" />
         </div>
-        <h1 className="text-xl font-bold text-white tracking-tight">
+        <h1 className="text-2xl text-white tracking-tight">
           Undangan Bergabung Tim
         </h1>
         <p className="text-xs text-zinc-400">
@@ -68,12 +68,12 @@ export default async function AcceptInvitationPage({
       </div>
 
       {/* Kartu Status / Detail Tim */}
-      <div className="p-6 bg-zinc-900/90 border border-zinc-800 rounded-2xl space-y-5 shadow-xl">
+      <div className="card-glow p-6 rounded-2xl space-y-5">
         <div className="text-center pb-4 border-b border-zinc-800">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-amber-500 bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/20">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-amber-500 bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/20">
             {tournamentNama}
           </span>
-          <h2 className="text-2xl font-black text-white mt-2 tracking-tight">
+          <h2 className="text-2xl text-white mt-2 tracking-tight">
             {teamNama}
           </h2>
         </div>

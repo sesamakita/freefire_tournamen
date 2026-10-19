@@ -1,33 +1,368 @@
 @import "tailwindcss";
 
+/* ============================================================================
+   ArenaKu — Design Tokens
+   Arah visual: "Dark Futuristic Esports Dashboard"
+   Deep navy-black + electric blue accents + luminous borders + glassmorphism
+   ========================================================================== */
+
 :root {
-  --background: #09090b;
-  --foreground: #f4f4f5;
+  --background: #05070f;
+  --foreground: #eaf0ff;
+
+  /* Brand ramp */
+  --brand-50: #eaf3ff;
+  --brand-100: #cfe3ff;
+  --brand-200: #a3caff;
+  --brand-300: #6fadff;
+  --brand-400: #4da3ff;
+  --brand-500: #1e6fff;
+  --brand-600: #1558d6;
+  --brand-700: #1043a8;
+  --brand-glow: rgba(77, 163, 255, 0.45);
+
+  /* Surfaces */
+  --surface-0: #05070f;
+  --surface-1: #0a0f1e;
+  --surface-2: #0e1830;
+  --surface-3: #131c33;
+  --line: rgba(60, 140, 255, 0.22);
+  --line-strong: rgba(60, 140, 255, 0.45);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
   --font-sans: var(--font-open-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-headline: var(--font-michroma), "Segoe UI", sans-serif;
   --font-michroma: var(--font-michroma), "Segoe UI", sans-serif;
+  /* font-mono dialihkan ke Open Sans agar hanya ada 2 typeface di proyek.
+     Angka tetap rata kolom lewat tabular-nums di body. */
+  --font-mono: var(--font-open-sans), ui-monospace, "Segoe UI", monospace;
+
+  /* ---- Brand tokens (dipakai untuk aksen & CTA) ---- */
+  --color-brand-50: var(--brand-50);
+  --color-brand-100: var(--brand-100);
+  --color-brand-200: var(--brand-200);
+  --color-brand-300: var(--brand-300);
+  --color-brand-400: var(--brand-400);
+  --color-brand-500: var(--brand-500);
+  --color-brand-600: var(--brand-600);
+  --color-brand-700: var(--brand-700);
+
+  /* ---- Remap zinc -> navy (agar seluruh UI otomatis bertema) ---- */
+  --color-zinc-950: #05070f;
+  --color-zinc-900: #0a1020;
+  --color-zinc-800: #182646;
+  --color-zinc-700: #22335a;
+  --color-zinc-600: #3d5280;
+  --color-zinc-500: #6f7f9e;
+  --color-zinc-400: #93a1bd;
+  --color-zinc-300: #bcc7dd;
+  --color-zinc-200: #d6dff0;
+  --color-zinc-100: #eaf0ff;
+  --color-zinc-50: #f5f8ff;
+
+  /* ---- Remap amber -> electric blue (aksen utama lama) ---- */
+  --color-amber-300: #6fadff;
+  --color-amber-400: #4da3ff;
+  --color-amber-500: #1e6fff;
+  --color-amber-600: #1558d6;
+  --color-amber-700: #1043a8;
+
+  /* ---- Remap blue -> brand ramp (sisa migrasi: sebelumnya biru Tailwind
+     #3b82f6 hidup berdampingan dengan brand #1e6fff) ---- */
+  --color-blue-300: var(--brand-300);
+  --color-blue-400: var(--brand-400);
+  --color-blue-500: var(--brand-500);
+  --color-blue-600: var(--brand-600);
+  --color-blue-700: var(--brand-700);
+  --color-blue-800: #0d3690;
+  --color-blue-900: #0a2a6f;
+  --color-blue-950: #071c4a;
+  /* indigo hanya dipakai 1x (gradien kartu undangan) — samakan ke navy */
+  --color-indigo-950: #071c4a;
+
+  /* ---- Partner gradient ---- */
+  --color-orange-500: #3d7bff;
+  --color-orange-600: #2a4fe0;
+
+  /* ---- Semantic ---- */
+  --color-emerald-400: #34e2a8;
+  --color-emerald-500: #22d39a;
+  --color-emerald-600: #12a97a;
+  --color-red-400: #ff6b84;
+  --color-red-500: #ff4d6a;
+  --color-red-600: #e02b4d;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #09090b;
-    --foreground: #f4f4f5;
+    --background: #05070f;
+    --foreground: #eaf0ff;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-open-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+html {
+  color-scheme: dark;
 }
 
-/* Headline styling using Michroma font for competitive gaming & esports theme */
-h1, h2, h3, h4, h5, h6, .font-headline {
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-open-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* Angka rata kolom — pengganti peran font mono pada tabel skor/klasemen */
+  font-variant-numeric: tabular-nums;
+  /* Baseline keterbacaan untuk paragraf. UI padat (label, badge, tabel)
+     dirapatkan lewat .ui-dense agar tidak terasa berhamburan. */
+  line-height: 1.65;
+  /* Ambient glow — kesan "nocturnal / broadcast" */
+  background-image:
+    radial-gradient(900px 480px at 15% -10%, rgba(30, 111, 255, 0.16), transparent 60%),
+    radial-gradient(760px 420px at 92% 0%, rgba(77, 163, 255, 0.1), transparent 65%),
+    radial-gradient(800px 600px at 50% 110%, rgba(42, 79, 224, 0.12), transparent 70%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* UI padat: label, badge, tabel, tombol. 1.65 terlalu longgar di sini
+   dan membuat baris tabel terasa mengambang. */
+.ui-dense,
+.ui-dense * {
+  line-height: 1.35;
+}
+
+/* Kecualikan heading — aturan heading (1.25) lebih spesifik secara desain
+   dan tidak boleh ditimpa oleh .ui-dense di dalam tabel/panel padat. */
+.ui-dense h1, .ui-dense h2, .ui-dense h3,
+.ui-dense h4, .ui-dense h5, .ui-dense h6 {
+  line-height: 1.25;
+}
+
+/* Typography — display uppercase, tight tracking */
+.font-headline {
   font-family: var(--font-michroma), "Segoe UI", sans-serif;
   letter-spacing: 0.025em;
+  /* Michroma sangat lebar & berjarak lebar secara desain. Di ukuran kecil,
+     line-height default (1.5) membuat judul multi-baris terasa berhamburan. */
+  line-height: 1.25;
 }
+
+/* Michroma hanya punya weight 400 & tanpa italic.
+   Cegah browser membuat bold/italic sintetis yang membuatnya tampak beda font.
+   Catatan: karena weight dipaksa 400, class font-bold/black pada heading
+   TIDAK berefek — hierarki dibangun lewat ukuran, warna, dan spasi. */
+.font-headline {
+  font-style: normal;
+  font-weight: 400;
+  font-synthesis: none;
+}
+
+
+::selection {
+  background: var(--brand-500);
+  color: #ffffff;
+}
+
+/* ============================================================================
+   Komponen utilitas
+   ========================================================================== */
+
+/* Kartu glassmorphic dengan border bercahaya */
+.card-glow {
+  background: linear-gradient(180deg, rgba(19, 28, 51, 0.72) 0%, rgba(10, 15, 30, 0.9) 100%);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(14px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 0 0 1px rgba(30, 111, 255, 0.06),
+    0 18px 40px -20px rgba(0, 0, 0, 0.9);
+}
+
+.card-glow-hover {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+.card-glow-hover:hover {
+  border-color: var(--line-strong);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 0 1px rgba(77, 163, 255, 0.18),
+    0 0 28px -6px var(--brand-glow),
+    0 18px 40px -20px rgba(0, 0, 0, 0.9);
+  transform: translateY(-2px);
+}
+
+/* Panel untuk area konten utama */
+.panel {
+  background: rgba(10, 15, 30, 0.66);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(10px);
+}
+
+/* Border atas bercahaya (signature look) */
+.edge-top-glow {
+  position: relative;
+}
+.edge-top-glow::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--brand-400), transparent);
+  opacity: 0.75;
+}
+
+/* Efek glow untuk CTA */
+.glow-blue {
+  box-shadow: 0 0 0 1px rgba(77, 163, 255, 0.35), 0 8px 28px -8px var(--brand-glow);
+}
+.text-glow {
+  text-shadow: 0 0 18px rgba(77, 163, 255, 0.55);
+}
+
+/* Pola taktis */
+.bg-tactical-grid {
+  background-image: radial-gradient(rgba(77, 163, 255, 0.16) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.bg-tactical-lines {
+  background-image:
+    linear-gradient(to right, rgba(77, 163, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(77, 163, 255, 0.07) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Tipografi hantu raksasa di background (watermark) */
+.ghost-type {
+  font-family: var(--font-michroma), sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-synthesis: none;
+  text-transform: uppercase;
+  color: rgba(77, 163, 255, 0.05);
+  letter-spacing: -0.02em;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Scrollbar gelap */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #05070f;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e2b4a;
+  border-radius: 999px;
+  border: 2px solid #05070f;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2a3d66;
+}
+
+/* Fokus aksesibel (kontras >= 4.5:1 sesuai NFR PRD §7.9) */
+:focus-visible {
+  outline: 2px solid var(--brand-400);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-glow-hover:hover,
+  .card-esports:hover {
+    transform: none;
+  }
+}
+
+/* ============================================================================
+   PRO ESPORTS HUD CARD SYSTEM (AAA Competitive Gaming Aesthetics)
+   ========================================================================== */
+
+/* Authentic Esports Armor Card with Top Neon Edge Beam & Micro-Mesh */
+.card-esports {
+  position: relative;
+  background: 
+    linear-gradient(135deg, rgba(77, 163, 255, 0.05) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(14, 24, 48, 0.85) 0%, rgba(8, 13, 26, 0.95) 100%);
+  border: 1px solid rgba(60, 140, 255, 0.25);
+  backdrop-filter: blur(16px);
+  box-shadow:
+    inset 0 1px 0 rgba(77, 163, 255, 0.35),
+    0 12px 36px -12px rgba(0, 0, 0, 0.85);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-esports:hover {
+  border-color: rgba(77, 163, 255, 0.6);
+  box-shadow:
+    inset 0 1px 0 rgba(77, 163, 255, 0.6),
+    0 0 24px -4px rgba(77, 163, 255, 0.35),
+    0 16px 42px -12px rgba(0, 0, 0, 0.9);
+  transform: translateY(-2px);
+}
+
+/* Subtle carbon fiber weave background */
+.bg-carbon-mesh {
+  background-image: 
+    radial-gradient(rgba(77, 163, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.015) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.015) 75%),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.015) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.015) 75%);
+  background-size: 16px 16px, 8px 8px, 8px 8px;
+  background-position: 0 0, 0 0, 4px 4px;
+}
+
+/* Diamond / Polygon Rank Badges */
+.badge-polygon {
+  clip-path: polygon(15% 0%, 85% 0%, 100% 50%, 85% 100%, 15% 100%, 0% 50%);
+}
+
+/* Laser Neon Accent Line */
+.laser-line-cyan {
+  background: linear-gradient(90deg, transparent, #4da3ff, transparent);
+  height: 1px;
+}
+
+/* Tactical Corner Target Brackets [+] */
+.bracket-corners {
+  position: relative;
+}
+.bracket-corners::before,
+.bracket-corners::after {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  pointer-events: none;
+  z-index: 20;
+}
+.bracket-corners::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid #4da3ff;
+  border-left: 2px solid #4da3ff;
+}
+.bracket-corners::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid #4da3ff;
+  border-right: 2px solid #4da3ff;
+}
+
+/* Tactical HUD Technical Strip */
+.hud-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(60, 140, 255, 0.18);
+  padding-bottom: 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: #6f7f9e;
+}
+

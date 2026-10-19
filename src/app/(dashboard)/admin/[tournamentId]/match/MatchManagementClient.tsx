@@ -180,7 +180,7 @@ export default function MatchManagementClient({
     <div className="space-y-6">
       {/* Top action bar */}
       <div className="flex items-center justify-between">
-        <h2 className="text-base font-bold text-white flex items-center gap-2">
+        <h2 className="text-base text-white flex items-center gap-2">
           <Calendar className="w-4 h-4 text-amber-500" />
           Daftar Match Pertandingan ({matches.length})
         </h2>
@@ -202,23 +202,23 @@ export default function MatchManagementClient({
           return (
             <div
               key={m.id}
-              className="p-5 bg-zinc-900/80 border border-zinc-800 rounded-2xl flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+              className="card-glow p-5 rounded-2xl flex flex-col md:flex-row md:items-center md:justify-between gap-4"
             >
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                  <h3 className="font-extrabold text-base text-white tracking-tight">
+                  <h3 className="text-base text-white tracking-tight">
                     {m.nama}
                   </h3>
-                  <span className="px-2 py-0.5 rounded bg-zinc-800 text-[10px] font-semibold text-zinc-300">
+                  <span className="px-2 py-0.5 rounded bg-zinc-800 text-[11px] font-semibold text-zinc-300">
                     Round {m.round}
                   </span>
                   {m.grup && (
-                    <span className="px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 text-[10px] font-semibold">
+                    <span className="px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 text-[11px] font-semibold">
                       {m.grup}
                     </span>
                   )}
                   <span
-                    className={`px-2 py-0.5 rounded-full text-[10px] font-bold capitalize ${
+                    className={`px-2 py-0.5 rounded-full text-[11px] font-bold capitalize ${
                       m.status === "selesai"
                         ? "bg-emerald-500/20 text-emerald-400"
                         : m.status === "ongoing"
@@ -285,7 +285,7 @@ export default function MatchManagementClient({
       {showCreateModal && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
-            <h3 className="text-base font-bold text-white">Buat Match Pertandingan Baru</h3>
+            <h3 className="text-base text-white">Buat Match Pertandingan Baru</h3>
             <form onSubmit={handleCreateMatch} className="space-y-4 text-xs">
               <div>
                 <label className="block text-zinc-300 font-semibold mb-1">Nama Match *</label>
@@ -360,7 +360,7 @@ export default function MatchManagementClient({
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
             <div>
-              <h3 className="text-base font-bold text-white flex items-center gap-2">
+              <h3 className="text-base text-white flex items-center gap-2">
                 <KeyRound className="w-4 h-4 text-amber-500" />
                 {activeRoomMatch.room_id ? "Rotasi Room ID" : "Atur Room ID & Password"}
               </h3>
@@ -431,7 +431,7 @@ export default function MatchManagementClient({
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-lg w-full p-6 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
             <div>
-              <h3 className="text-base font-bold text-white flex items-center gap-2">
+              <h3 className="text-base text-white flex items-center gap-2">
                 <Users className="w-4 h-4 text-amber-500" />
                 Plotting Slot Peserta: {activeSlotMatch.nama}
               </h3>
