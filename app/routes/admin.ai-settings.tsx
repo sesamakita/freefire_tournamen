@@ -220,7 +220,7 @@ export default function AdminAISettingsRoute() {
                 </span>
               </h1>
               <p className="text-xs text-zinc-400 mt-1">
-                Atur penyedia kecerdasan buatan untuk membaca screenshot papan skor match Free Fire
+                Atur penyedia kecerdasan buatan untuk membaca screenshot papan skor match
               </p>
             </div>
           </div>

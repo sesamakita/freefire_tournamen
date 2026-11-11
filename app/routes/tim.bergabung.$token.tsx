@@ -13,7 +13,7 @@ import AcceptInviteActions from "@/app/(dashboard)/tim/bergabung/[token]/AcceptI
 export function meta() {
   return [
     { title: "Undangan Bergabung Tim — Arena Tempur" },
-    { name: "description", content: "Terima undangan bergabung ke tim Free Fire di Arena Tempur." },
+    { name: "description", content: "Terima undangan bergabung ke tim turnamen di Arena Tempur." },
   ];
 }
 
@@ -53,7 +53,7 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
   const isPending = invitation.status === "pending" && !isExpired;
 
   // @ts-expect-error Supabase nested relation
-  const teamNama = invitation.teams?.nama || "Tim Free Fire";
+  const teamNama = invitation.teams?.nama || "Tim Komunitas";
   // @ts-expect-error Supabase nested relation
   const tournamentNama = invitation.teams?.tournaments?.nama || "Turnamen";
 
@@ -89,7 +89,7 @@ export default function AcceptInvitationRoute() {
           Undangan Bergabung Tim
         </h1>
         <p className="text-xs text-zinc-400">
-          Anda diundang untuk bertanding di turnamen Free Fire
+          Anda diundang untuk bertanding di turnamen komunitas
         </p>
       </div>
 
@@ -112,7 +112,7 @@ export default function AcceptInvitationRoute() {
           </div>
 
           <div className="flex items-center justify-between py-1.5 border-b border-zinc-800/60">
-            <span className="text-zinc-400">UID Free Fire</span>
+            <span className="text-zinc-400">Game Player UID</span>
             <span className="font-mono font-bold text-amber-400">{invitation.uid_game}</span>
           </div>
 

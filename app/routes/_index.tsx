@@ -32,10 +32,10 @@ import PodiumSection from "@/components/PodiumSection";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Arena Tempur — Platform Turnamen Free Fire" },
+    { title: "Arena Tempur — Platform Turnamen Komunitas Esports" },
     {
       name: "description",
-      content: "Platform manajemen dan administrasi turnamen Free Fire terpercaya dengan Room ID T-15, anti-smurf UID, dan hadiah otomatis ke dompet.",
+      content: "Platform manajemen dan administrasi turnamen komunitas Battle Royale terpercaya & independen dengan Room ID T-15, anti-smurf UID, dan hadiah otomatis ke dompet.",
     },
   ];
 };
@@ -469,7 +469,7 @@ export default function HomeRoute() {
                   Validasi Game UID &amp; Anti-Smurf
                 </h3>
                 <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
-                  Setiap pemain diverifikasi menggunakan Game UID resmi Free Fire. Sistem secara otomatis mendeteksi dan menolak pendaftaran UID ganda dalam turnamen yang sama.
+                  Setiap pemain diverifikasi menggunakan Game Player UID. Sistem secara otomatis mendeteksi dan menolak pendaftaran UID ganda dalam turnamen yang sama.
                 </p>
               </div>
 
@@ -698,8 +698,20 @@ export default function HomeRoute() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-zinc-900 bg-zinc-950/80 py-8 text-center text-xs text-zinc-500 z-10">
-        <p>&copy; 2026 Arena Tempur &bull; Platform manajemen turnamen Free Fire terpercaya.</p>
+      <footer className="border-t border-zinc-900 bg-zinc-950 py-10 px-4 text-center text-xs text-zinc-500 z-10 space-y-4">
+        <div className="max-w-4xl mx-auto space-y-3">
+          <p className="font-medium text-zinc-300">
+            &copy; 2026 Arena Tempur &bull; Platform Manajemen Turnamen Komunitas Battle Royale Independen.
+          </p>
+          <div className="text-[11px] leading-relaxed text-zinc-500 border border-zinc-900 bg-zinc-900/30 p-4 rounded-xl text-left sm:text-center space-y-1.5">
+            <p className="font-semibold text-zinc-400 uppercase tracking-wider text-[10px] font-mono">
+              PENAFIAN HUKUM / LEGAL DISCLAIMER
+            </p>
+            <p>
+              Arena Tempur adalah platform independen yang dikembangkan sebagai perangkat manajemen kompetisi esports akar rumput (grassroots). Platform ini <strong>TIDAK berafiliasi, didukung, disponsori, atau terafiliasi secara resmi</strong> dengan SEA Group, Garena, Shopee, atau penerbit game mana pun. Seluruh merek dagang, logo turnamen resmi, dan hak cipta judul game (termasuk Free Fire dan Garena) merupakan hak milik penuh dari pemilik sah masing-masing.
+            </p>
+          </div>
+        </div>
       </footer>
     </div>
   );

@@ -72,8 +72,8 @@ export default function IntroOverlayPage() {
 
         <p className="text-sm sm:text-base text-zinc-400 max-w-lg font-medium">
           {isLoneWolf
-            ? "Pertarungan Duel 1v1 King of By One Free Fire akan segera berlangsung. Siapkan tim dan pantau bagan eliminasi secara langsung."
-            : "Pertandingan Battle Royale Free Fire akan segera dimulai. Pantau perolehan poin dan kills secara real-time di Arena Tempur."}
+            ? "Pertarungan Duel 1v1 King of By One Duel akan segera berlangsung. Siapkan tim dan pantau bagan eliminasi secara langsung."
+            : "Pertandingan Battle Royale akan segera dimulai. Pantau perolehan poin dan kills secara real-time di Arena Tempur."}
         </p>
 
         <div className="pt-4 flex items-center gap-6 text-xs text-zinc-500 font-mono uppercase tracking-wider">

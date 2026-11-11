@@ -7,7 +7,7 @@ import { WalletClientView } from "@/app/(dashboard)/dompet/WalletClientView";
 export function meta() {
   return [
     { title: "Dompet Hadiah Turnamen — Arena Tempur" },
-    { name: "description", content: "Kelola saldo kemenangan turnamen Free Fire dan ajukan penarikan ke e-wallet & rekening bank." },
+    { name: "description", content: "Kelola saldo kemenangan turnamen komunitas dan ajukan penarikan ke e-wallet & rekening bank." },
   ];
 }
 

@@ -6,7 +6,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 export const meta: MetaFunction = () => {
   return [
     { title: "Pencarian — Arena Tempur" },
-    { name: "description", content: "Cari turnamen, tim, atau pemain Free Fire." },
+    { name: "description", content: "Cari turnamen, tim, atau pemain turnamen." },
   ];
 };
 
@@ -227,7 +227,7 @@ export default function SearchPage() {
 
       {/* Footer */}
       <footer className="border-t border-zinc-900 bg-zinc-950/80 py-6 text-center text-xs text-zinc-600">
-        <p>&copy; 2026 Arena Tempur &bull; Pencarian turnamen &amp; tim Free Fire.</p>
+        <p>&copy; 2026 Arena Tempur &bull; Pencarian turnamen &amp; tim esports komunitas.</p>
       </footer>
     </div>
   );

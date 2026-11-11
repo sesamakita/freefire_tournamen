@@ -141,7 +141,7 @@ export default function CreateTeamPage() {
               Pendaftaran Tim Turnamen
             </h1>
             <p className="text-xs text-zinc-400 mt-0.5">
-              Daftarkan tim Free Fire Anda dan tentukan susunan kapten
+              Daftarkan tim Anda dan tentukan susunan kapten
             </p>
           </div>
         </div>
@@ -250,7 +250,7 @@ export default function CreateTeamPage() {
           <div className="card-glow card-glow-hover p-6 rounded-2xl space-y-4">
             <h2 className="text-sm text-white uppercase flex items-center gap-2 font-headline">
               <Trophy className="w-4 h-4 text-amber-500" />
-              {isLoneWolf ? "2. Data Akun Game Free Fire" : "2. Data Game Kapten (Pemain 1 / Inti)"}
+              {isLoneWolf ? "2. Data Akun Game Pemain" : "2. Data Game Kapten (Pemain 1 / Inti)"}
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -275,10 +275,10 @@ export default function CreateTeamPage() {
                 )}
               </div>
 
-              {/* UID Free Fire */}
+              {/* Game Player UID */}
               <div>
                 <label className="block text-xs font-semibold text-zinc-300 mb-1.5">
-                  UID Free Fire <span className="text-red-400">*</span>
+                  Game Player UID <span className="text-red-400">*</span>
                 </label>
                 <input
                   {...register("kapten_uid")}
@@ -295,7 +295,7 @@ export default function CreateTeamPage() {
                   <p className="text-xs text-red-400 mt-1">{errors.kapten_uid.message}</p>
                 ) : (
                   <p className="text-[11px] text-zinc-500 mt-1">
-                    8–12 digit angka akun Free Fire resmi. Wajib akurat.
+                    8–12 digit angka Game Player ID. Wajib akurat.
                   </p>
                 )}
               </div>

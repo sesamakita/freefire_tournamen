@@ -178,7 +178,7 @@ export default function PublicTournamentLayout() {
 
       {/* Public Footer */}
       <footer className="border-t border-zinc-900 py-6 text-center text-xs text-zinc-500">
-        <p>&copy; 2026 Arena Tempur &bull; Satu Sumber Kebenaran untuk Turnamen Free Fire</p>
+        <p>&copy; 2026 Arena Tempur &bull; Satu Sumber Kebenaran untuk Turnamen Komunitas</p>
       </footer>
     </div>
   );

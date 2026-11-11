@@ -18,7 +18,7 @@ import TournamentAdminNav from "@/components/TournamentAdminNav";
 export function meta() {
   return [
     { title: "Verifikasi Pendaftaran Tim — Arena Tempur" },
-    { name: "description", content: "Verifikasi pendaftaran dan pembayaran tim turnamen Free Fire." },
+    { name: "description", content: "Verifikasi pendaftaran dan pembayaran tim turnamen komunitas." },
   ];
 }
 

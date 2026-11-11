@@ -22,7 +22,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 export function meta() {
   return [
     { title: "Portal Panitia Turnamen — Arena Tempur" },
-    { name: "description", content: "Pusat kendali verifikasi tim, jadwal match, Room ID, dan persetujuan skor turnamen Free Fire." },
+    { name: "description", content: "Pusat kendali verifikasi tim, jadwal match, Room ID, dan persetujuan skor turnamen komunitas." },
   ];
 }
 
@@ -157,7 +157,7 @@ export default function AdminHubRoute() {
               </span>
             </div>
             <p className="text-xs text-zinc-400 mt-0.5">
-              Gunakan aplikasi di HP panitia untuk verifikasi bukti transfer, scan papan skor Free Fire via kamera AI, dan kontrol overlay OBS.
+              Gunakan aplikasi di HP panitia untuk verifikasi bukti transfer, scan papan skor match via kamera AI, dan kontrol overlay OBS.
             </p>
           </div>
         </div>

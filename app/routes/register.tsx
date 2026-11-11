@@ -11,7 +11,7 @@ import { createClient } from "@/lib/supabase/client";
 export const meta: MetaFunction = () => {
   return [
     { title: "Daftar Akun — Arena Tempur" },
-    { name: "description", content: "Daftar sebagai kapten atau anggota tim turnamen Free Fire." },
+    { name: "description", content: "Daftar sebagai kapten atau anggota tim turnamen komunitas." },
   ];
 };
 
@@ -92,7 +92,7 @@ export default function RegisterPage() {
           Buat Akun Arena Tempur
         </h2>
         <p className="text-xs text-zinc-400 mt-1">
-          Daftar sebagai kapten atau anggota tim turnamen Free Fire
+          Daftar sebagai kapten atau anggota tim turnamen komunitas
         </p>
       </div>
 

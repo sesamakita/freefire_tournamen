@@ -77,7 +77,7 @@ export default function PublicBracketPage() {
             Bagan Gugur (Knockout Bracket)
           </h2>
           <p className="text-xs text-zinc-400 mt-1 max-w-xl">
-            Sistem eliminasi tunggal format 1v1 Free Fire. Pemenang tiap duel langsung melaju ke babak berikutnya hingga Grand Final.
+            Sistem eliminasi tunggal format 1v1 Battle Royale. Pemenang tiap duel langsung melaju ke babak berikutnya hingga Grand Final.
           </p>
         </div>
 

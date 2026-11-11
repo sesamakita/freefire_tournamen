@@ -20,7 +20,7 @@ export default function AuthLayout() {
         </Link>
         <p className="text-xs text-zinc-400 font-medium tracking-wide flex items-center justify-center gap-1.5">
           <ShieldCheck className="w-4 h-4 text-[#DA292A] inline" />
-          Satu Sumber Kebenaran untuk Turnamen Free Fire
+          Satu Sumber Kebenaran untuk Turnamen Komunitas
         </p>
       </div>
 

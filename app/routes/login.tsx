@@ -11,7 +11,7 @@ import { createClient } from "@/lib/supabase/client";
 export const meta: MetaFunction = () => {
   return [
     { title: "Masuk — Arena Tempur" },
-    { name: "description", content: "Masuk ke platform turnamen Free Fire Arena Tempur." },
+    { name: "description", content: "Masuk ke platform turnamen komunitas Arena Tempur." },
   ];
 };
 

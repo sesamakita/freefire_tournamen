@@ -23,7 +23,7 @@ import TeamHeaderActions from "@/app/(dashboard)/tim/[teamId]/TeamHeaderActions"
 export const meta: MetaFunction = () => {
   return [
     { title: "Dashboard — Arena Tempur" },
-    { name: "description", content: "Dashboard tim dan turnamen Free Fire." },
+    { name: "description", content: "Dashboard tim dan turnamen komunitas." },
   ];
 };
 
@@ -107,7 +107,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
       created_at: st.created_at,
       tournament: {
         id: st.tournaments?.id || "",
-        nama: st.tournaments?.nama || "Turnamen Free Fire",
+        nama: st.tournaments?.nama || "Turnamen Komunitas",
         slug: st.tournaments?.slug || "",
       },
     }));
@@ -179,7 +179,7 @@ export default function DashboardRoute() {
             </span>
           </h1>
           <p className="text-xs sm:text-sm text-zinc-400 mt-1">
-            Kelola tim Anda, pantau jadwal turnamen Free Fire, dan akses Room ID di sini.
+            Kelola tim Anda, pantau jadwal turnamen komunitas, dan akses Room ID di sini.
           </p>
         </div>
 
@@ -260,7 +260,7 @@ export default function DashboardRoute() {
                     </div>
                     <h3 className="text-base text-white tracking-tight font-bold">{team.nama}</h3>
                     <p className="text-xs text-zinc-400 mt-0.5">
-                      {team.tournaments?.nama || "Turnamen Free Fire"}
+                      {team.tournaments?.nama || "Turnamen Komunitas"}
                     </p>
                   </div>
                   <div>
@@ -352,7 +352,7 @@ export default function DashboardRoute() {
                 Belum ada tim yang didaftarkan
               </p>
               <p className="text-xs text-zinc-500 max-w-sm mx-auto mt-1">
-                Daftarkan tim Anda sekarang untuk mengikuti turnamen Free Fire dan dapatkan akses
+                Daftarkan tim Anda sekarang untuk mengikuti turnamen komunitas dan dapatkan akses
                 Room ID saat pertandingan dimulai.
               </p>
             </div>

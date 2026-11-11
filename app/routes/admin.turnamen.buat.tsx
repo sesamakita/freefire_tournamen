@@ -9,7 +9,7 @@ import { createTournamentSchema, type CreateTournamentInput } from "@/lib/valida
 export function meta() {
   return [
     { title: "Buka Turnamen Baru — Arena Tempur" },
-    { name: "description", content: "Buka turnamen Free Fire baru dan mulai pendaftaran tim." },
+    { name: "description", content: "Buka turnamen komunitas baru dan mulai pendaftaran tim." },
   ];
 }
 
@@ -106,7 +106,7 @@ export default function CreateTournamentRoute() {
               Buka Turnamen Baru
             </h1>
             <p className="text-xs text-zinc-400 mt-0.5">
-              Siapkan turnamen Free Fire dan buka registrasi untuk tim peserta
+              Siapkan turnamen komunitas dan buka registrasi untuk tim peserta
             </p>
           </div>
         </div>
@@ -180,7 +180,7 @@ export default function CreateTournamentRoute() {
               {...register("nama")}
               onChange={handleNamaChange}
               type="text"
-              placeholder="Contoh: Arena Tempur Free Fire Championship Season 1"
+              placeholder="Contoh: Arena Tempur Championship Season 1"
               disabled={isSubmitting}
               className={`w-full px-3.5 py-2.5 bg-zinc-950 border rounded-xl text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none transition-colors ${
                 errors.nama ? "border-red-500/80 focus:border-red-500" : "border-zinc-800 focus:border-amber-500"

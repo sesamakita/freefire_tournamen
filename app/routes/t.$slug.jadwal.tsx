@@ -58,7 +58,7 @@ export default function PublicSchedulePage() {
           Jadwal Pertandingan
         </h2>
         <p className="text-xs text-zinc-400 mt-0.5">
-          Jadwal resmi dan susunan slot peserta pertandingan Free Fire Battle Royale
+          Jadwal resmi dan susunan slot peserta pertandingan Battle Royale
         </p>
       </div>
 
