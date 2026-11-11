@@ -1,0 +1,411 @@
+@import url('https://fonts.googleapis.com/css2?family=Michroma&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import "tailwindcss";
+
+/* ============================================================================
+   ArenaKu — Design Tokens
+   Arah visual: "Dark Futuristic Esports Dashboard"
+   Deep navy-black + electric blue accents + luminous borders + glassmorphism
+   ========================================================================== */
+
+:root {
+  --font-michroma: 'Michroma', "Segoe UI", sans-serif;
+  --font-open-sans: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --background: #0B0B0E; /* Jet Black */
+  --foreground: #FFFFFF; /* Pure White */
+
+  /* Brand ramp: Sharp Crimson Red (#DA292A) */
+  --brand-50: #FFF0F0;
+  --brand-100: #FFE0E0;
+  --brand-200: #FFA8A8;
+  --brand-300: #FF6B6C;
+  --brand-400: #EF3839;
+  --brand-500: #DA292A; /* Crimson Red Utama */
+  --brand-600: #B81D1E;
+  --brand-700: #8A1213;
+  --brand-glow: rgba(218, 41, 42, 0.42);
+
+  /* Surfaces: Jet Black & Dark Graphite (#141416) */
+  --surface-0: #0B0B0E;
+  --surface-1: #141416;
+  --surface-2: #1B1B1F;
+  --surface-3: #24242A;
+  --line: rgba(218, 41, 42, 0.22);
+  --line-strong: rgba(218, 41, 42, 0.48);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-sans: var(--font-open-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-headline: var(--font-michroma), "Segoe UI", sans-serif;
+  --font-michroma: var(--font-michroma), "Segoe UI", sans-serif;
+  --font-mono: var(--font-open-sans), ui-monospace, "Segoe UI", monospace;
+
+  /* ---- Brand tokens (Crimson Red) ---- */
+  --color-brand-50: var(--brand-50);
+  --color-brand-100: var(--brand-100);
+  --color-brand-200: var(--brand-200);
+  --color-brand-300: var(--brand-300);
+  --color-brand-400: var(--brand-400);
+  --color-brand-500: var(--brand-500);
+  --color-brand-600: var(--brand-600);
+  --color-brand-700: var(--brand-700);
+
+  /* ---- Remap zinc -> Jet Black, Graphite, and Neutral Grey (#8E8E93) ---- */
+  --color-zinc-950: #0B0B0E; /* Jet Black */
+  --color-zinc-900: #141416; /* Dark Graphite */
+  --color-zinc-800: #202026; /* Dark Slate Border */
+  --color-zinc-700: #2C2C34;
+  --color-zinc-600: #48484A;
+  --color-zinc-500: #636366;
+  --color-zinc-400: #8E8E93; /* Neutral Grey acuan */
+  --color-zinc-300: #C7C7CC;
+  --color-zinc-200: #E5E5EA;
+  --color-zinc-100: #F2F2F7;
+  --color-zinc-50: #FFFFFF;
+
+  /* ---- Remap amber -> Sharp Crimson Red (#DA292A) ---- */
+  --color-amber-300: #FF6B6C;
+  --color-amber-400: #EF3839;
+  --color-amber-500: #DA292A; /* Crimson Red Utama */
+  --color-amber-600: #B81D1E;
+  --color-amber-700: #8A1213;
+
+  /* ---- Remap blue -> Crimson Red ramp ---- */
+  --color-blue-300: var(--brand-300);
+  --color-blue-400: var(--brand-400);
+  --color-blue-500: var(--brand-500);
+  --color-blue-600: var(--brand-600);
+  --color-blue-700: var(--brand-700);
+  --color-blue-800: #6B0E0F;
+  --color-blue-900: #4D090A;
+  --color-blue-950: #2D0506;
+  --color-indigo-950: #2D0506;
+
+  /* ---- Partner gradient ---- */
+  --color-orange-500: #EF3839;
+  --color-orange-600: #DA292A;
+
+  /* ---- Semantic ---- */
+  --color-emerald-400: #34e2a8;
+  --color-emerald-500: #22d39a;
+  --color-emerald-600: #12a97a;
+  --color-red-400: #FF6B6C;
+  --color-red-500: #DA292A;
+  --color-red-600: #B81D1E;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0B0B0E;
+    --foreground: #FFFFFF;
+  }
+}
+
+html {
+  color-scheme: dark;
+}
+
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-open-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* Angka rata kolom — pengganti peran font mono pada tabel skor/klasemen */
+  font-variant-numeric: tabular-nums;
+  /* Baseline keterbacaan untuk paragraf. UI padat (label, badge, tabel)
+     dirapatkan lewat .ui-dense agar tidak terasa berhamburan. */
+  line-height: 1.65;
+  position: relative;
+}
+
+/* Ambient glow diisolasi ke layer GPU tetap (GPU-accelerated composite layer)
+   Mencegah browser melakukan continuous repaint pada setiap frame scrolling */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(900px 480px at 15% -10%, rgba(218, 41, 42, 0.14), transparent 60%),
+    radial-gradient(760px 420px at 92% 0%, rgba(239, 56, 57, 0.08), transparent 65%),
+    radial-gradient(800px 600px at 50% 110%, rgba(184, 29, 30, 0.10), transparent 70%);
+  background-repeat: no-repeat;
+  transform: translateZ(0);
+}
+
+/* UI padat: label, badge, tabel, tombol. */
+.ui-dense,
+.ui-dense * {
+  line-height: 1.35;
+}
+
+/* Kecualikan heading */
+.ui-dense h1, .ui-dense h2, .ui-dense h3,
+.ui-dense h4, .ui-dense h5, .ui-dense h6 {
+  line-height: 1.25;
+}
+
+/* Typography — display uppercase, tight tracking */
+.font-headline {
+  font-family: var(--font-michroma), "Segoe UI", sans-serif;
+  letter-spacing: 0.025em;
+  line-height: 1.25;
+  font-style: normal;
+  font-weight: 400;
+  font-synthesis: none;
+}
+
+::selection {
+  background: var(--brand-500);
+  color: #ffffff;
+}
+
+/* ============================================================================
+   Komponen utilitas
+   ========================================================================== */
+
+/* ============================================================================
+   ROTATING BORDER GRADIENT HOVER EFFECT (No Blurry Shadow)
+   ========================================================================== */
+@keyframes rotating-border-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Kartu glassmorphic Dark Graphite dengan border Crimson Red (Tanpa bayangan) */
+.card-glow {
+  position: relative;
+  border-radius: 1rem;
+  background: linear-gradient(180deg, #18181C 0%, #121215 100%);
+  border: 1px solid var(--line);
+  box-shadow: none !important;
+}
+
+/* Rotating Border Gradient on Hover (Berlaku untuk card-glow-hover, card-rotating-border, dan card-esports) */
+.card-glow-hover,
+.card-rotating-border,
+.card-esports {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: #141416;
+  border: 1px solid rgba(218, 41, 42, 0.25);
+  box-shadow: none !important;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+}
+
+.card-glow-hover:hover,
+.card-rotating-border:hover,
+.card-esports:hover {
+  transform: translateY(-2px);
+  border-color: transparent;
+  box-shadow: none !important; /* Hilangkan bayangan terang */
+}
+
+/* Layer 1: Conic Gradient yang berputar mulus tanpa terputus (Seamless Dual-Beam) */
+.card-glow-hover::before,
+.card-rotating-border::before,
+.card-esports::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: conic-gradient(
+    from 0deg,
+    rgba(218, 41, 42, 0.15) 0deg,
+    rgba(218, 41, 42, 0.5) 45deg,
+    #DA292A 75deg,
+    #FFFFFF 90deg,
+    #DA292A 105deg,
+    rgba(218, 41, 42, 0.5) 135deg,
+    rgba(218, 41, 42, 0.15) 180deg,
+    rgba(218, 41, 42, 0.5) 225deg,
+    #DA292A 255deg,
+    #FFFFFF 270deg,
+    #DA292A 285deg,
+    rgba(218, 41, 42, 0.5) 315deg,
+    rgba(218, 41, 42, 0.15) 360deg
+  );
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.35s ease;
+}
+
+.card-glow-hover:hover::before,
+.card-rotating-border:hover::before,
+.card-esports:hover::before {
+  opacity: 1;
+  animation: rotating-border-spin 3.2s linear infinite;
+}
+
+/* Layer 2: Mask dalam (inset 1.5px) yang menutupi isi kartu, menyisakan 1.5px garis tepi bergradien */
+.card-glow-hover::after,
+.card-rotating-border::after,
+.card-esports::after {
+  content: "";
+  position: absolute;
+  inset: 1.5px;
+  border-radius: inherit;
+  background: linear-gradient(180deg, #18181C 0%, #121215 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Semua isi konten di dalam card diletakkan di z-index 3 agar bisa diklik dan terbaca jernih */
+.card-glow-hover > *:not(.absolute),
+.card-rotating-border > *:not(.absolute),
+.card-esports > *:not(.absolute) {
+  position: relative;
+  z-index: 3;
+}
+
+/* Panel untuk area konten utama */
+.panel {
+  background: rgba(20, 20, 22, 0.75);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(10px);
+}
+
+/* Efek glow untuk CTA */
+.glow-blue,
+.glow-red {
+  box-shadow: 0 0 0 1px rgba(218, 41, 42, 0.35), 0 8px 28px -8px var(--brand-glow);
+}
+.text-glow {
+  text-shadow: 0 0 18px rgba(218, 41, 42, 0.55);
+}
+
+/* Pola taktis */
+.bg-tactical-grid {
+  background-image: radial-gradient(rgba(218, 41, 42, 0.14) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.bg-tactical-lines {
+  background-image:
+    linear-gradient(to right, rgba(218, 41, 42, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(218, 41, 42, 0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Tipografi hantu raksasa di background (watermark) */
+.ghost-type {
+  font-family: var(--font-michroma), sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-synthesis: none;
+  text-transform: uppercase;
+  color: rgba(218, 41, 42, 0.05);
+  letter-spacing: -0.02em;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Scrollbar Jet Black & Crimson */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0B0B0E;
+}
+::-webkit-scrollbar-thumb {
+  background: #2C2C34;
+  border-radius: 999px;
+  border: 2px solid #0B0B0E;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #DA292A;
+}
+
+/* Fokus aksesibel (kontras >= 4.5:1 sesuai NFR PRD §7.9) */
+:focus-visible {
+  outline: 2px solid var(--brand-400);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-glow-hover:hover,
+  .card-esports:hover {
+    transform: none;
+  }
+}
+
+/* ============================================================================
+   PRO ESPORTS HUD CARD SYSTEM (AAA Competitive Gaming Aesthetics)
+   ========================================================================== */
+
+/* Subtle carbon fiber weave background */
+.bg-carbon-mesh {
+  background-image: 
+    radial-gradient(rgba(218, 41, 42, 0.08) 1px, transparent 1px),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.015) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.015) 75%),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.015) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.015) 75%);
+  background-size: 16px 16px, 8px 8px, 8px 8px;
+  background-position: 0 0, 0 0, 4px 4px;
+}
+
+/* Diamond / Polygon Rank Badges */
+.badge-polygon {
+  clip-path: polygon(15% 0%, 85% 0%, 100% 50%, 85% 100%, 15% 100%, 0% 50%);
+}
+
+/* Chamfered Polygonal Corners (Prompt Acuan: clip-path polygon) */
+.chamfer-btn {
+  clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);
+}
+
+.chamfer-card {
+  clip-path: polygon(14px 0%, 100% 0%, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0% 100%, 0% 14px);
+}
+
+/* Laser Neon Accent Line */
+.laser-line-cyan,
+.laser-line-red {
+  background: linear-gradient(90deg, transparent, #DA292A, transparent);
+  height: 1px;
+}
+
+
+
+/* Tactical HUD Technical Strip */
+.hud-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(218, 41, 42, 0.22);
+  padding-bottom: 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: #8E8E93;
+}
+
+/* ============================================================================
+   BROADCAST OVERLAY TICKER ANIMATION
+   ========================================================================== */
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 28s linear infinite;
+}

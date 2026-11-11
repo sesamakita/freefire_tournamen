@@ -66,3 +66,39 @@ export const forgotPasswordSchema = z.object({
 })
 
 export type ForgotPasswordInput = z.infer<typeof forgotPasswordSchema>
+
+/**
+ * Validasi Form Update Profil Pengguna
+ */
+export const updateProfileSchema = z.object({
+  nama: z
+    .string()
+    .trim()
+    .min(2, 'Nama minimal 2 karakter.')
+    .max(60, 'Nama maksimal 60 karakter.'),
+  no_wa: z
+    .string()
+    .trim()
+    .regex(/^(08|62)[0-9]{8,13}$/, 'Nomor WhatsApp tidak valid. Contoh: 08123456789 atau 628123456789.'),
+})
+
+export type UpdateProfileInput = z.infer<typeof updateProfileSchema>
+
+/**
+ * Validasi Form Ganti Password Pengguna
+ */
+export const updatePasswordSchema = z
+  .object({
+    password_baru: z
+      .string()
+      .min(8, 'Password minimal 8 karakter dan mengandung huruf serta angka.')
+      .regex(/^(?=.*[A-Za-z])(?=.*\d)/, 'Password minimal 8 karakter dan mengandung huruf serta angka.'),
+    konfirmasi_password: z.string(),
+  })
+  .refine((data) => data.password_baru === data.konfirmasi_password, {
+    message: 'Konfirmasi password tidak cocok.',
+    path: ['konfirmasi_password'],
+  })
+
+export type UpdatePasswordInput = z.infer<typeof updatePasswordSchema>
+

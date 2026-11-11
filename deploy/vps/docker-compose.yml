@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  # 1. MediaMTX - RTMP/RTSP/WebRTC Ingest Server (Menerima sinyal video dari HP Wasit)
+  mediamtx:
+    image: bluenviron/mediamtx:latest
+    container_name: arena-mediamtx
+    restart: unless-stopped
+    ports:
+      - "1935:1935"   # RTMP Ingest Port
+      - "8554:8554"   # RTSP
+      - "8888:8888"   # HLS Web
+      - "8889:8889"   # WebRTC (WHEP)
+    environment:
+      - MTX_PROTOCOLS=tcp
+    volumes:
+      - ./mediamtx.yml:/mediamtx.yml:ro
+
+  # 2. OBS Studio Cloud Container dengan Web VNC GUI
+  # Memungkinkan panitia melihat dan mengontrol OBS langsung dari browser di port 8443
+  obs-studio:
+    image: lscr.io/linuxserver/obs-studio:latest
+    container_name: arena-cloud-obs
+    restart: unless-stopped
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Jakarta
+      - CUSTOM_PORT=8443
+    volumes:
+      - ./obs-config:/config
+    ports:
+      - "8443:8443"   # HTTPS Web GUI OBS Studio
+      - "4455:4455"   # obs-websocket port (untuk remote control otomatis dari web Arena Tempur)
+    shm_size: "2gb"
+    depends_on:
+      - mediamtx

@@ -22,6 +22,7 @@ CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 DROP VIEW IF EXISTS public.standings CASCADE;
 
 DROP TABLE IF EXISTS public.disputes CASCADE;
+DROP TABLE IF EXISTS public.brackets CASCADE;
 DROP TABLE IF EXISTS public.results CASCADE;
 DROP TABLE IF EXISTS public.match_teams CASCADE;
 DROP TABLE IF EXISTS public.matches CASCADE;
@@ -87,8 +88,16 @@ CREATE TABLE public.tournaments (
   max_teams           INTEGER           NOT NULL DEFAULT 32 CHECK (max_teams BETWEEN 2 AND 64),
   tgl_mulai           DATE              NOT NULL,
   tgl_selesai         DATE              NOT NULL CHECK (tgl_selesai >= tgl_mulai),
+  format              TEXT              NOT NULL DEFAULT 'battle_royale' CHECK (format IN ('battle_royale', 'lone_wolf_1v1', 'clash_squad')),
+  max_rounds          INTEGER           NOT NULL DEFAULT 5,
   status              tournament_status NOT NULL DEFAULT 'draft',
   is_public           BOOLEAN           NOT NULL DEFAULT TRUE,
+  -- Live Streaming & OBS Overlays Support
+  is_live             BOOLEAN           NOT NULL DEFAULT FALSE,
+  live_platform       TEXT              DEFAULT 'youtube' CHECK (live_platform IN ('youtube', 'tiktok', 'facebook', 'custom')),
+  live_stream_url     TEXT,
+  live_title          TEXT,
+  obs_token           UUID              DEFAULT uuid_generate_v4(),
   created_at          TIMESTAMPTZ       NOT NULL DEFAULT NOW(),
   updated_at          TIMESTAMPTZ       NOT NULL DEFAULT NOW()
 );
@@ -227,7 +236,31 @@ CREATE TABLE public.disputes (
   UNIQUE(result_id, team_id)
 );
 
--- 4.11 AUDIT LOG (Immutable / Append-only)
+-- 4.11 BRACKETS (Untuk Lone Wolf 1v1 & Turnamen Sistem Gugur)
+CREATE TABLE public.brackets (
+  id              UUID        PRIMARY KEY DEFAULT uuid_generate_v4(),
+  tournament_id   UUID        NOT NULL REFERENCES public.tournaments(id) ON DELETE CASCADE,
+  round_number    INTEGER     NOT NULL,
+  match_number    INTEGER     NOT NULL,
+  round_name      TEXT        NOT NULL,
+  player1_id      UUID        REFERENCES public.teams(id) ON DELETE SET NULL,
+  player2_id      UUID        REFERENCES public.teams(id) ON DELETE SET NULL,
+  score_p1        INTEGER     NOT NULL DEFAULT 0 CHECK (score_p1 >= 0),
+  score_p2        INTEGER     NOT NULL DEFAULT 0 CHECK (score_p2 >= 0),
+  winner_id       UUID        REFERENCES public.teams(id) ON DELETE SET NULL,
+  next_bracket_id UUID        REFERENCES public.brackets(id) ON DELETE SET NULL,
+  next_slot       INTEGER     CHECK (next_slot IN (1, 2)),
+  status          TEXT        NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'ready', 'ongoing', 'completed')),
+  room_id         TEXT,
+  room_pass       TEXT,
+  screenshot_url  TEXT,
+  jadwal          TIMESTAMPTZ,
+  created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  UNIQUE(tournament_id, round_number, match_number)
+);
+
+-- 4.12 AUDIT LOG (Immutable / Append-only)
 CREATE TABLE public.audit_log (
   id            UUID        PRIMARY KEY DEFAULT uuid_generate_v4(),
   tournament_id UUID        REFERENCES public.tournaments(id) ON DELETE SET NULL,
@@ -319,6 +352,19 @@ DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
 CREATE TRIGGER on_auth_user_created
   AFTER INSERT OR UPDATE ON auth.users
   FOR EACH ROW EXECUTE FUNCTION public.handle_new_auth_user();
+
+-- 6.2.1 Sinkronisasi otomatis user yang sudah terdaftar di auth.users ke public.users
+INSERT INTO public.users (id, email, nama, no_wa, email_verified_at)
+SELECT 
+  id, 
+  COALESCE(email, id::text || '@arenaku.id'), 
+  COALESCE(raw_user_meta_data->>'nama', split_part(COALESCE(email, 'User'), '@', 1)),
+  COALESCE(raw_user_meta_data->>'no_wa', '081234567890'),
+  email_confirmed_at
+FROM auth.users
+ON CONFLICT (id) DO UPDATE
+SET email = EXCLUDED.email,
+    email_verified_at = EXCLUDED.email_verified_at;
 
 -- 6.3 Server-Side Points Calculation (BR-SCR-11)
 CREATE OR REPLACE FUNCTION public.calculate_points()
@@ -460,6 +506,7 @@ ALTER TABLE public.matches          ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.match_teams      ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.results          ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.disputes         ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.brackets         ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.audit_log        ENABLE ROW LEVEL SECURITY;
 
 -- Helper Staff Check
@@ -579,7 +626,21 @@ CREATE POLICY "disputes_access" ON public.disputes
     )
   );
 
--- 8.8 Audit Log (Append-Only)
+-- 8.8 Brackets (Lone Wolf / Knockout Tree)
+CREATE POLICY "brackets_public_read" ON public.brackets
+  FOR SELECT USING (
+    EXISTS (
+      SELECT 1 FROM public.tournaments t
+      WHERE t.id = tournament_id AND t.is_public = TRUE AND t.status != 'draft'
+    )
+  );
+
+CREATE POLICY "brackets_staff_manage" ON public.brackets
+  FOR ALL USING (
+    is_tournament_staff(tournament_id, ARRAY['owner','admin','panitia']::staff_role[])
+  );
+
+-- 8.9 Audit Log (Append-Only)
 CREATE POLICY "audit_log_admin_read" ON public.audit_log
   FOR SELECT USING (
     is_tournament_staff(tournament_id, ARRAY['owner','admin']::staff_role[])
@@ -602,20 +663,101 @@ VALUES
 ON CONFLICT (id) DO UPDATE SET public = EXCLUDED.public;
 
 -- Policy Storage: Publik untuk logo, banner, qris
+DROP POLICY IF EXISTS "Public Access for logos, banners, qris" ON storage.objects;
 CREATE POLICY "Public Access for logos, banners, qris"
 ON storage.objects FOR SELECT
 USING (bucket_id IN ('logos', 'banners', 'qris'));
 
 -- Policy Storage: Upload autentikasi
+DROP POLICY IF EXISTS "Authenticated Users can upload" ON storage.objects;
 CREATE POLICY "Authenticated Users can upload"
 ON storage.objects FOR INSERT
 TO authenticated
 WITH CHECK (bucket_id IN ('logos', 'banners', 'qris', 'payments', 'screenshots', 'disputes'));
 
+DROP POLICY IF EXISTS "Users can read own uploaded files or staff" ON storage.objects;
 CREATE POLICY "Users can read own uploaded files or staff"
 ON storage.objects FOR SELECT
 TO authenticated
 USING (bucket_id IN ('payments', 'screenshots', 'disputes'));
+
+-- ------------------------------------------------------------------------------
+-- 10. KEAMANAN KREDENSIAL ROOM (HARDENING T-15)
+-- ------------------------------------------------------------------------------
+-- Cabut akses SELECT langsung pada kolom sensitif room_id & room_pass dari publik
+REVOKE SELECT (room_id, room_pass) ON public.matches FROM anon;
+REVOKE SELECT (room_id, room_pass) ON public.matches FROM authenticated;
+GRANT SELECT (room_id, room_pass) ON public.matches TO service_role;
+
+-- Fungsi RPC Terproteksi untuk Akses Room ID Terverifikasi
+CREATE OR REPLACE FUNCTION public.get_match_room_secure(p_match_id UUID)
+RETURNS JSONB AS $$
+DECLARE
+  v_match       RECORD;
+  v_user_id     UUID := auth.uid();
+  v_is_staff    BOOLEAN;
+  v_is_participant BOOLEAN;
+  v_now_ms      BIGINT;
+  v_sched_ms    BIGINT;
+  v_t15_ms      BIGINT;
+BEGIN
+  IF v_user_id IS NULL THEN
+    RAISE EXCEPTION 'UNAUTHORIZED: Silakan login terlebih dahulu';
+  END IF;
+
+  SELECT id, tournament_id, jadwal, room_id, room_pass, status
+  INTO v_match
+  FROM public.matches
+  WHERE id = p_match_id;
+
+  IF NOT FOUND THEN
+    RAISE EXCEPTION 'MATCH_NOT_FOUND: Pertandingan tidak ditemukan';
+  END IF;
+
+  SELECT EXISTS (
+    SELECT 1 FROM public.tournament_staff
+    WHERE tournament_id = v_match.tournament_id AND user_id = v_user_id
+  ) INTO v_is_staff;
+
+  IF v_is_staff THEN
+    RETURN jsonb_build_object(
+      'room_id', v_match.room_id,
+      'room_pass', v_match.room_pass,
+      'is_staff', TRUE
+    );
+  END IF;
+
+  SELECT EXISTS (
+    SELECT 1 
+    FROM public.match_teams mt
+    JOIN public.teams t ON t.id = mt.team_id
+    LEFT JOIN public.team_members tm ON tm.team_id = t.id
+    WHERE mt.match_id = p_match_id
+      AND (t.kapten_user_id = v_user_id OR tm.user_id = v_user_id)
+  ) INTO v_is_participant;
+
+  IF NOT v_is_participant THEN
+    RAISE EXCEPTION 'NOT_PARTICIPANT: Anda bukan peserta yang bertanding pada match ini';
+  END IF;
+
+  v_now_ms   := (EXTRACT(EPOCH FROM NOW()) * 1000)::BIGINT;
+  v_sched_ms := (EXTRACT(EPOCH FROM v_match.jadwal) * 1000)::BIGINT;
+  v_t15_ms   := v_sched_ms - (15 * 60 * 1000);
+
+  IF v_now_ms < v_t15_ms THEN
+    RAISE EXCEPTION 'ROOM_TIMELOCKED: Room ID baru dibuka tepat 15 menit sebelum kickoff. Dibuka pada %',
+      to_char(v_match.jadwal - INTERVAL '15 minutes', 'YYYY-MM-DD"T"HH24:MI:SS"Z"');
+  END IF;
+
+  RETURN jsonb_build_object(
+    'room_id', v_match.room_id,
+    'room_pass', v_match.room_pass,
+    'is_staff', FALSE
+  );
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+GRANT EXECUTE ON FUNCTION public.get_match_room_secure(UUID) TO authenticated;
 
 -- ==============================================================================
 -- SELESAI. Database ArenaKu siap digunakan!

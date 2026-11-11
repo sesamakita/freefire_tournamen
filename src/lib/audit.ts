@@ -7,11 +7,14 @@ type AuditAction =
   | 'member.joined' | 'member.removed'
   | 'payment.verify' | 'payment.reject'
   | 'match.create' | 'match.update' | 'match.status_change'
-  | 'room.set' | 'room.rotate' | 'room.view'
+  | 'room.set' | 'room.rotate' | 'room.view' | 'room.copy'
   | 'score.submit' | 'score.approve' | 'score.reject' | 'score.recalculate'
   | 'dispute.submit' | 'dispute.upheld' | 'dispute.rejected'
-  | 'tournament.status_change' | 'tournament.point_config_change'
+  | 'tournament.status_change' | 'tournament.point_config_change' | 'tournament.update'
+  | 'bracket.generate' | 'bracket.score_update' | 'bracket.room_assign'
   | 'user.role_change'
+  | 'ai.scoreboard_scan'
+  | 'prize.disburse' | 'wallet.withdraw'
 
 interface AuditEntry {
   tournamentId?: string

@@ -1,0 +1,24 @@
+{
+  "name": "Arena Tempur — Platform Turnamen Free Fire",
+  "short_name": "Arena Tempur",
+  "description": "Platform manajemen dan pencatatan hasil turnamen Free Fire resmi.",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "background_color": "#0B0B0E",
+  "theme_color": "#DA292A",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/images/logo-monogram.svg",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/logo-monogram.svg",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

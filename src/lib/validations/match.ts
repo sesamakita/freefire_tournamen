@@ -42,9 +42,19 @@ export const plotMatchTeamsSchema = z.object({
   slots: z.array(
     z.object({
       team_id: z.string().uuid("Team ID tidak valid."),
-      slot: z.number().int().min(1, "Slot minimal 1.").max(12, "Slot maksimal 12 untuk Free Fire."),
+      slot: z.number().int().min(1, "Slot minimal 1.").max(12, "Slot maksimal 12 untuk Battle Royale."),
     })
   ).min(1, "Minimal pilih 1 tim untuk dimasukkan ke match."),
 });
 
 export type PlotMatchTeamsInput = z.infer<typeof plotMatchTeamsSchema>;
+
+/**
+ * Validasi Konfirmasi / Tanda Terima Akses Room (Read Receipt / Ack)
+ */
+export const ackRoomSchema = z.object({
+  action: z.enum(["view", "copy"]).default("copy"),
+});
+
+export type AckRoomInput = z.infer<typeof ackRoomSchema>;
+

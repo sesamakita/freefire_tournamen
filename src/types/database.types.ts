@@ -65,6 +65,11 @@ export interface Database {
           max_teams: number
           tgl_mulai: string
           tgl_selesai: string
+          format: string
+          max_rounds: number
+          prize_pool: number
+          prize_distribution: Json
+          prizes_disbursed_at: string | null
           status: TournamentStatus
           is_public: boolean
           created_at: string
@@ -85,6 +90,11 @@ export interface Database {
           max_teams?: number
           tgl_mulai: string
           tgl_selesai: string
+          format?: string
+          max_rounds?: number
+          prize_pool?: number
+          prize_distribution?: Json
+          prizes_disbursed_at?: string | null
           status?: TournamentStatus
           is_public?: boolean
           created_at?: string
@@ -105,6 +115,11 @@ export interface Database {
           max_teams?: number
           tgl_mulai?: string
           tgl_selesai?: string
+          format?: string
+          max_rounds?: number
+          prize_pool?: number
+          prize_distribution?: Json
+          prizes_disbursed_at?: string | null
           status?: TournamentStatus
           is_public?: boolean
           created_at?: string
@@ -326,6 +341,9 @@ export interface Database {
           team_id: string
           slot: number
           created_at: string
+          room_viewed_at: string | null
+          room_copied_at: string | null
+          room_ack_by: string | null
         }
         Insert: {
           id?: string
@@ -333,6 +351,9 @@ export interface Database {
           team_id: string
           slot: number
           created_at?: string
+          room_viewed_at?: string | null
+          room_copied_at?: string | null
+          room_ack_by?: string | null
         }
         Update: {
           id?: string
@@ -340,6 +361,9 @@ export interface Database {
           team_id?: string
           slot?: number
           created_at?: string
+          room_viewed_at?: string | null
+          room_copied_at?: string | null
+          room_ack_by?: string | null
         }
         Relationships: []
       }
@@ -487,6 +511,114 @@ export interface Database {
           ip?: string | null
           user_agent?: string | null
           created_at?: string
+        }
+        Relationships: []
+      }
+      wallets: {
+        Row: {
+          id: string
+          user_id: string
+          balance: number
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          balance?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          balance?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      wallet_transactions: {
+        Row: {
+          id: string
+          wallet_id: string
+          tournament_id: string | null
+          team_id: string | null
+          type: 'prize_credit' | 'withdrawal' | 'refund' | 'adjustment'
+          amount: number
+          status: 'pending' | 'completed' | 'failed' | 'cancelled'
+          description: string
+          reference_id: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          wallet_id: string
+          tournament_id?: string | null
+          team_id?: string | null
+          type: 'prize_credit' | 'withdrawal' | 'refund' | 'adjustment'
+          amount: number
+          status?: 'pending' | 'completed' | 'failed' | 'cancelled'
+          description: string
+          reference_id?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          wallet_id?: string
+          tournament_id?: string | null
+          team_id?: string | null
+          type?: 'prize_credit' | 'withdrawal' | 'refund' | 'adjustment'
+          amount?: number
+          status?: 'pending' | 'completed' | 'failed' | 'cancelled'
+          description?: string
+          reference_id?: string | null
+          created_at?: string
+        }
+        Relationships: []
+      }
+      withdrawals: {
+        Row: {
+          id: string
+          user_id: string
+          wallet_id: string
+          amount: number
+          method: 'dana' | 'gopay' | 'ovo' | 'shopeepay' | 'bank_bca' | 'bank_bri' | 'bank_mandiri' | 'bank_bni'
+          account_number: string
+          account_name: string
+          status: 'pending' | 'processing' | 'completed' | 'rejected'
+          admin_notes: string | null
+          disbursed_at: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          wallet_id: string
+          amount: number
+          method: 'dana' | 'gopay' | 'ovo' | 'shopeepay' | 'bank_bca' | 'bank_bri' | 'bank_mandiri' | 'bank_bni'
+          account_number: string
+          account_name: string
+          status?: 'pending' | 'processing' | 'completed' | 'rejected'
+          admin_notes?: string | null
+          disbursed_at?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          wallet_id?: string
+          amount?: number
+          method?: 'dana' | 'gopay' | 'ovo' | 'shopeepay' | 'bank_bca' | 'bank_bri' | 'bank_mandiri' | 'bank_bni'
+          account_number?: string
+          account_name?: string
+          status?: 'pending' | 'processing' | 'completed' | 'rejected'
+          admin_notes?: string | null
+          disbursed_at?: string | null
+          created_at?: string
+          updated_at?: string
         }
         Relationships: []
       }

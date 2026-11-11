@@ -24,7 +24,7 @@ export const createTeamSchema = z.object({
   kapten_uid: z
     .string()
     .trim()
-    .regex(/^[0-9]{8,12}$/, "UID Free Fire harus 8–12 digit angka."),
+    .regex(/^[0-9]{8,12}$/, "UID Akun Game harus 8–12 digit angka."),
   kapten_role: z.enum(["rusher", "sniper", "support", "igl", "cadangan"], {
     message: "Pilih peran kapten di dalam tim.",
   }),
@@ -50,7 +50,7 @@ export const inviteMemberSchema = z.object({
   uid_game: z
     .string()
     .trim()
-    .regex(/^[0-9]{8,12}$/, "UID Free Fire harus 8–12 digit angka."),
+    .regex(/^[0-9]{8,12}$/, "UID Akun Game harus 8–12 digit angka."),
   role_tim: z.enum(["rusher", "sniper", "support", "igl", "cadangan"], {
     message: "Pilih peran tim.",
   }),
@@ -58,3 +58,42 @@ export const inviteMemberSchema = z.object({
 });
 
 export type InviteMemberInput = z.infer<typeof inviteMemberSchema>;
+
+/**
+ * Validasi Edit Data Pemain / Roster
+ */
+export const updateMemberSchema = z.object({
+  ign: z
+    .string()
+    .trim()
+    .min(3, "IGN minimal 3 karakter.")
+    .max(20, "IGN maksimal 20 karakter."),
+  uid_game: z
+    .string()
+    .trim()
+    .regex(/^[0-9]{8,12}$/, "UID Akun Game harus 8–12 digit angka."),
+  role_tim: z.enum(["rusher", "sniper", "support", "igl", "cadangan"], {
+    message: "Pilih peran tim yang valid.",
+  }),
+  is_substitute: z.boolean(),
+});
+
+export type UpdateMemberInput = z.infer<typeof updateMemberSchema>;
+
+/**
+ * Validasi Edit Data Tim (Nama & Logo)
+ */
+export const updateTeamSchema = z.object({
+  nama: z
+    .string()
+    .trim()
+    .min(3, "Nama tim minimal 3 karakter.")
+    .max(30, "Nama tim maksimal 30 karakter.")
+    .regex(
+      /^[a-zA-Z0-9 _\-]+$/,
+      "Nama tim hanya boleh huruf, angka, spasi, tanda minus (-), dan underscore (_)."
+    ),
+  logo_url: z.string().url("URL logo tidak valid.").optional().or(z.literal("")),
+});
+
+export type UpdateTeamInput = z.infer<typeof updateTeamSchema>;
