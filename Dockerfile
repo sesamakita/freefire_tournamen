@@ -48,4 +48,4 @@ RUN rm -f build/client/index.html public/index.html
 EXPOSE 3000
 
 # Start production server
-CMD ["npx", "react-router-serve", "./build/server/index.js"]
+CMD ["node", "./node_modules/@react-router/serve/bin.js", "./build/server/index.js"]

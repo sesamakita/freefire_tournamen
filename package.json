@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "react-router dev --host 0.0.0.0 --port 3000",
     "build": "react-router build",
-    "start": "react-router-serve ./build/server/index.js",
+    "start": "node ./node_modules/@react-router/serve/bin.js ./build/server/index.js",
     "dev:next": "next dev -H 0.0.0.0",
     "build:next": "next build",
     "lint": "eslint"
