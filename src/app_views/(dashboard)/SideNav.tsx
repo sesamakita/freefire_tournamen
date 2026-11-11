@@ -71,7 +71,7 @@ export function SideNav({ isStaff }: { isStaff: boolean }) {
 
       <div className="mt-auto flex flex-col items-center gap-2 text-zinc-500">
         <span className="text-[10px] font-black tracking-widest text-zinc-600 rotate-180 [writing-mode:vertical-rl]">
-          ARENA <span className="text-[#DA292A]">TARUNG</span>
+          ARENA <span className="text-[#DA292A]">TEMPUR</span>
         </span>
       </div>
     </nav>

@@ -1,7 +1,8 @@
-import { Link, Outlet, useLoaderData, redirect, Form } from "react-router";
+import { Link, Outlet, useLoaderData, redirect } from "react-router";
 import type { LoaderFunctionArgs } from "react-router";
 import { Trophy, LogOut, Shield, Search, Bell, User, Home, PlusCircle, Wallet } from "lucide-react";
 import { createWebClient } from "@/lib/supabase/web";
+import { createClient } from "@/lib/supabase/client";
 import { SideNav } from "@/app/(dashboard)/SideNav";
 
 export async function loader({ request }: LoaderFunctionArgs) {
@@ -39,6 +40,17 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function DashboardLayout() {
   const { user, profile, isStaff } = useLoaderData<typeof loader>();
+
+  const handleLogout = async () => {
+    try {
+      const clientSupabase = createClient();
+      await clientSupabase.auth.signOut();
+    } catch (err) {
+      console.warn("Client signOut:", err);
+    }
+    // Hard redirect to logout endpoint to clear all HTTP cookies and refresh page state
+    window.location.href = "/api/auth/logout";
+  };
 
   return (
     <div className="min-h-screen flex bg-transparent text-zinc-100">
@@ -119,17 +131,16 @@ export default function DashboardLayout() {
                 </div>
               </Link>
 
-              <Form action="/api/auth/logout" method="post">
-                <button
-                  type="submit"
-                  title="Keluar"
-                  aria-label="Keluar"
-                  className="p-2 rounded-xl text-zinc-400 hover:text-red-400 hover:bg-red-500/10
-                             border border-transparent hover:border-red-500/30 transition-all cursor-pointer"
-                >
-                  <LogOut className="w-4 h-4" />
-                </button>
-              </Form>
+              <button
+                type="button"
+                onClick={handleLogout}
+                title="Keluar"
+                aria-label="Keluar"
+                className="p-2 rounded-xl text-zinc-400 hover:text-red-400 hover:bg-red-500/10
+                           border border-transparent hover:border-red-500/30 transition-all cursor-pointer"
+              >
+                <LogOut className="w-4 h-4" />
+              </button>
             </div>
           </div>
         </header>
